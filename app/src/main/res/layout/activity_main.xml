@@ -7,27 +7,36 @@
     tools:context="pdm.di.ubi.pt.tw_ilmanaque.MainActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="72dp"
         android:layout_height="68dp"
         android:elevation="14dp"
-        app:srcCompat="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintVertical_bias="0.246" />
+        app:layout_constraintVertical_bias="0.2"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <Button
+        android:id="@+id/bReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="abrirMenuRegistoAtividadas"
+        android:text="Registo Atividades"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="198dp" />
+
+    <Button
+        android:id="@+id/bMet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="abrirMenuMetereologia"
+        android:text="Metereologia "
+        tools:layout_editor_absoluteX="110dp"
+        tools:layout_editor_absoluteY="295dp" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -16,6 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".RegistoAtividades"
+            android:label="RegistoAtividades"
+            >
+
+        </activity>
+
+        <activity
+            android:name=".Meteorologia"
+            android:label="Meteorologia"
+            >
+
+        </activity>
+
+
+
+
+
+
     </application>
 
 </manifest>
