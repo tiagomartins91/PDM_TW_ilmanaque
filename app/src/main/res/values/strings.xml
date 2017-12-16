@@ -6,4 +6,11 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="nome_planta">Nome da Planta </string>
+    <string name="terreno">Terreno</string>
+    <string name="quantidade">Quantidade</string>
+    <string name="data">data</string>
+    <string name="registar">Registar</string>
+
 </resources>
