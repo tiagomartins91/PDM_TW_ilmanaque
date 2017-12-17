@@ -16,14 +16,18 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //teste
+        AjudanteBD ajudanteBD = new AjudanteBD(this);
+        SQLiteDatabase db = ajudanteBD.getWritableDatabase();
+
     }
 
 
-    public void abrirMenuRegistoAtividadas(View v){
+    public void abrirMenuAtividades(View v){
 
-        Intent abrirMenuRegistoAtividadas = new Intent(this, RegistoAtividades.class);
+        Intent abrirMenuAtividades = new Intent(this, Atividades.class);
 
-        startActivity(abrirMenuRegistoAtividadas);
+        startActivity(abrirMenuAtividades);
 
 
     }

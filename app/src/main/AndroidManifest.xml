@@ -23,6 +23,13 @@
         </activity>
 
         <activity
+            android:name=".Atividades"
+            android:label="Atividades"
+            >
+
+        </activity>
+
+        <activity
             android:name=".RegistoAtividades"
             android:label="RegistoAtividades"
             >

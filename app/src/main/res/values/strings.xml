@@ -7,10 +7,19 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="nome_planta">Nome da Planta </string>
+    <string name="nome_planta">Nome da Atividade </string>
     <string name="terreno">Terreno</string>
     <string name="quantidade">Quantidade</string>
-    <string name="data">data</string>
+    <string name="data">ano/mes/dia</string>
     <string name="registar">Registar</string>
+    <string name="atividades">Atividades</string>
+    <string name="metereologia">Metereologia</string>
+    <string name="selecionar_atividade_a_editar">Selecionar atividade a editar</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="definir_lembrete">Definir Lembrete</string>
+    <string name="descricao">descricao</string>
+    <string name="ano_mes_dia">ano/mes/dia</string>
+    <string name="autom_tico">Automático</string>
+    <string name="manual">Manual</string>
 
 </resources>
