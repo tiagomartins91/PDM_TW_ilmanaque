@@ -20,27 +20,22 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void abrirMenuRegistoAtividadas(View v){
-
         Intent abrirMenuRegistoAtividadas = new Intent(this, RegistoAtividades.class);
-
         startActivity(abrirMenuRegistoAtividadas);
-
-
     }
 
 
 
 
     public void abrirMenuMetereologia(View v){
-
-
         Intent abrirMenuMetereologia = new Intent(this , Meteorologia.class);
-
         startActivity(abrirMenuMetereologia);
-
-
     }
 
+    public void abrirCalendario (View v){
+        Intent iIntent = new Intent (this, Calendario.class);
+        startActivity(iIntent);
+    }
 
 
 }
