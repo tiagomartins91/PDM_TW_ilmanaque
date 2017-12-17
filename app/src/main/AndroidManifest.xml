@@ -41,9 +41,11 @@
             android:label="Meteorologia"
             android:parentActivityName=".MainActivity"
             >
-
         </activity>
 
+        <activity android:name=".Calendario"
+                  android:label="Calendario"
+                  android:parentActivityName=".MainActivity"/>
 
 
 

@@ -2,6 +2,7 @@ package pdm.di.ubi.pt.tw_ilmanaque;
 
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,6 +12,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by joaosaraiva on 15-12-2017.
@@ -70,21 +74,39 @@ public class JsonTask extends AsyncTask<String, Void, String> {
 
         try {
 
+            DecimalFormat df = new DecimalFormat("#.###");
             JSONObject jsonObject = new JSONObject(result);
+            JSONObject jsonCity = new JSONObject(jsonObject.getString("city"));
 
-            JSONObject weatherData = new JSONObject(jsonObject.getString("main"));
-
-            double temperature = Double.parseDouble(weatherData.getString("temp"));
-
-            double temperaturaCelsius = temperature - 273.15;
-
-            String placeName = jsonObject.getString("name");
+            String cidade = jsonCity.getString("name");
+            System.out.println("CIDADE: " + cidade);
 
 
+            //lista dos dias
+            JSONArray jsonList = new JSONArray(jsonObject.getString("list"));
 
-            Meteorologia.temperatureView.setText(String.valueOf(temperaturaCelsius));
+            //fazer presivao para HOJE (3h dps do momento atual)
+            JSONObject jsonDiaHoje = jsonList.getJSONObject(1);
+            JSONObject jsonMainObject = jsonDiaHoje.getJSONObject("main");
 
-            Meteorologia.placeView.setText(String.valueOf(placeName));
+            double temp_max_hoje = Double.parseDouble(jsonMainObject.getString("temp_max"))-272.15;
+            double temp_mim_hoje = Double.parseDouble(jsonMainObject.getString("temp_min"))-273.15;
+            int humidade = Integer.parseInt(jsonMainObject.getString("humidity"));
+
+
+            JSONArray jsonArrayWeather = jsonDiaHoje.getJSONArray("weather");
+
+            JSONObject jsonObjectWheather = jsonArrayWeather.getJSONObject(0);
+            String estadoDoCeu = jsonObjectWheather.getString("main");
+
+
+            Meteorologia.ceuView.setText(estadoDoCeu);//Clear Rain Cloulds
+            Meteorologia.temperatureView.setText(String.valueOf(df.format(temp_max_hoje))+ "ºC");
+            Meteorologia.placeView.setText(String.valueOf(cidade));
+            Meteorologia.temperatureminView.setText(String.valueOf(df.format(temp_mim_hoje))+"ºC");
+            Meteorologia.humidityView.setText(String.valueOf(humidade) + "%");
+
+
 
 
         } catch (JSONException e) {

@@ -16,35 +16,26 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //teste
-        AjudanteBD ajudanteBD = new AjudanteBD(this);
-        SQLiteDatabase db = ajudanteBD.getWritableDatabase();
-
     }
 
 
-    public void abrirMenuAtividades(View v){
-
-        Intent abrirMenuAtividades = new Intent(this, Atividades.class);
-
-        startActivity(abrirMenuAtividades);
-
-
+    public void abrirMenuRegistoAtividadas(View v){
+        Intent abrirMenuRegistoAtividadas = new Intent(this, RegistoAtividades.class);
+        startActivity(abrirMenuRegistoAtividadas);
     }
 
 
 
 
     public void abrirMenuMetereologia(View v){
-
-
         Intent abrirMenuMetereologia = new Intent(this , Meteorologia.class);
-
         startActivity(abrirMenuMetereologia);
-
-
     }
 
+    public void abrirCalendario (View v){
+        Intent iIntent = new Intent (this, Calendario.class);
+        startActivity(iIntent);
+    }
 
 
 }
