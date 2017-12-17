@@ -24,6 +24,9 @@ public class Meteorologia extends AppCompatActivity {
 
     static TextView placeView;
     static TextView temperatureView;
+    static TextView temperatureminView;
+    static TextView humidityView;
+    static TextView ceuView;
 
 
     @Override
@@ -33,6 +36,10 @@ public class Meteorologia extends AppCompatActivity {
 
         placeView = (TextView) findViewById(R.id.nameTextView);
         temperatureView = (TextView) findViewById(R.id.temperatureTextView);
+        temperatureminView = (TextView) findViewById(R.id.temperatureMin);
+        humidityView = (TextView) findViewById(R.id.humidityView);
+        ceuView = (TextView) findViewById(R.id.ceuView);
+
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -62,7 +69,7 @@ public class Meteorologia extends AppCompatActivity {
 
         System.out.println("Lat e long " + latitude + " " + longiture);
 
-        jsonTask.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longiture) + "&appid=3dff1d0003eb884c7b1856b85f7f1e84");
+        jsonTask.execute("http://api.openweathermap.org/data/2.5/forecast?lat=" + String.valueOf(latitude) + "&lon="  + String.valueOf(longiture) + "&appid=1e49fc78a012d7a8d3cff3325ab72334");
 
     }
 
