@@ -13,16 +13,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by joaosaraiva on 15-12-2017.
  */
 
-public class JsonTask extends AsyncTask<String, Void, String> {
+public class JsonTaskWeek extends AsyncTask<String, Void, String> {
 
-
+    Auxiliar aux;
 
 
     @Override
@@ -89,7 +91,7 @@ public class JsonTask extends AsyncTask<String, Void, String> {
             JSONObject jsonDiaHoje = jsonList.getJSONObject(1);
             JSONObject jsonMainObject = jsonDiaHoje.getJSONObject("main");
 
-            double temp_max_hoje = Double.parseDouble(jsonMainObject.getString("temp_max"))-272.15;
+            double temp_max_hoje = Double.parseDouble(jsonMainObject.getString("temp_max"))-273.15;
             double temp_mim_hoje = Double.parseDouble(jsonMainObject.getString("temp_min"))-273.15;
             int humidade = Integer.parseInt(jsonMainObject.getString("humidity"));
 
@@ -99,8 +101,32 @@ public class JsonTask extends AsyncTask<String, Void, String> {
             JSONObject jsonObjectWheather = jsonArrayWeather.getJSONObject(0);
             String estadoDoCeu = jsonObjectWheather.getString("main");
 
+            aux = new Auxiliar();
+            String parsedEstadoDoCeu = aux.parseWeatherCondition(estadoDoCeu);
 
-            Meteorologia.ceuView.setText(estadoDoCeu);//Clear Rain Cloulds
+            String teste = jsonDiaHoje.getString("dt_txt");
+
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
+            Date date2 = sdf.parse(teste);//chave!
+
+
+
+
+            String currentDateandTime = sdf.format(date);
+            String data2 = sdf.format(date2);
+
+            System.out.println(data2);
+
+            if(date.before(date2))
+                System.out.println("after");
+
+            System.out.println(currentDateandTime);
+
+
+            Meteorologia.ceuView.setText(parsedEstadoDoCeu);
             Meteorologia.temperatureView.setText(String.valueOf(df.format(temp_max_hoje))+ "ºC");
             Meteorologia.placeView.setText(String.valueOf(cidade));
             Meteorologia.temperatureminView.setText(String.valueOf(df.format(temp_mim_hoje))+"ºC");
@@ -110,6 +136,8 @@ public class JsonTask extends AsyncTask<String, Void, String> {
 
 
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

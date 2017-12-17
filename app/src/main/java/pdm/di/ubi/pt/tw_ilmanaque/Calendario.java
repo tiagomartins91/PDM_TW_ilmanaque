@@ -34,7 +34,7 @@ public class Calendario extends AppCompatActivity {
 
         //Set an event for Teachers' Professional Day 2016 which is 21st of October
 
-        Event ev1 = new Event(Color.RED, 1513560839000L, "Teachers' Professional Day");
+        Event ev1 = new Event(Color.GREEN, 1513560839000L, "Teachers' Professional Day");
         compactCalendar.addEvent(ev1);
 
         compactCalendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
