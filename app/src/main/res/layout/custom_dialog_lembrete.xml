@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_dialog"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -16,8 +17,7 @@
         android:id="@+id/et_inputdescricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/descricao"
-        />
+        android:hint="@string/descricao" />
 
 
     <EditText
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ano_mes_dia"
-        >
+        android:inputType="date">
 
 
     </EditText>

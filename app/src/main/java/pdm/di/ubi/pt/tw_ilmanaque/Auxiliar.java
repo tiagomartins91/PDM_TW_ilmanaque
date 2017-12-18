@@ -2,6 +2,9 @@ package pdm.di.ubi.pt.tw_ilmanaque;
 import android.graphics.Color;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by saraiva on 17-12-2017.
  */
@@ -47,7 +50,15 @@ public class Auxiliar {
     }
 
 
+    public int verify(String s)
+    {
+        Pattern p = Pattern.compile("\\d\\d\\d\\d/\\d\\d/\\d\\d");
+        Matcher m = p.matcher(s);
+        if(m.matches())
+            return 1;
+        return 0 ;
 
+    }
 
 
 }
