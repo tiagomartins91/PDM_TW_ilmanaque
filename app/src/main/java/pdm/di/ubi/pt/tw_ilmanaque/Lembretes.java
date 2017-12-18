@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,12 +17,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class Lembretes extends AppCompatActivity {
 
 
     ArrayList<String> lembretes_array = new ArrayList<String>();
+    private EditText mDateEntryField;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,6 +131,7 @@ public class Lembretes extends AppCompatActivity {
 
         final AjudanteBD ajudanteBD= new AjudanteBD(this);
         final SQLiteDatabase db = ajudanteBD.getWritableDatabase();
+        final EditText setData;
 
 
         // set dialog message
@@ -135,6 +140,16 @@ public class Lembretes extends AppCompatActivity {
                 .setPositiveButton("Criar",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+
+
+                                setData = (EditText) findViewById(R.id.);
+                                mEditInit.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        showDialog(DATEINIT_DIALOG);
+                                    }
+
+                                });
 
 
 
@@ -175,6 +190,11 @@ public class Lembretes extends AppCompatActivity {
 
 
     }
+
+
+
+
+
 
 
 
