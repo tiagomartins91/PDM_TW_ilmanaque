@@ -128,6 +128,31 @@ public class AjudanteBD extends SQLiteOpenHelper {
     }
 
 
+    public boolean EditarLembrete(int id_lemb){ //update dos campos da atividade
+
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues newValues = new ContentValues();
+        newValues.put(T2_COLUNA4, 1);
+
+
+
+        long resultado = db.update(NOME_TABELA2,newValues, T2_COLUNA1 +  " = " + "'"+id_lemb+"'" , null);
+
+
+        db.close();
+
+
+        if (resultado==-1)
+            return false;
+
+
+        return true;
+
+    }
+
+
 
 
     public boolean RegistarLembrete (String descricao, String data, int estado, int id_atividade){
