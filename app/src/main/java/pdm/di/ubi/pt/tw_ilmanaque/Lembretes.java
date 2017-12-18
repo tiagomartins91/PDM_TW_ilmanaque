@@ -57,12 +57,12 @@ public class Lembretes extends AppCompatActivity {
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_single_choice, lembretes_array);
         lembretes.setAdapter(adapter);
-
+        final Intent menuLem = new Intent(this, Lembretes.class);
 
 
         lembretes.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
                 CheckedTextView cb = (CheckedTextView) view;
 
@@ -76,6 +76,8 @@ public class Lembretes extends AppCompatActivity {
                 if(cb.isChecked() == true){
 
                     AlertDialog.Builder a_builder = new AlertDialog.Builder(Lembretes.this);
+                   final AjudanteBD ajudanteBD = new AjudanteBD(Lembretes.this);
+                     SQLiteDatabase db = ajudanteBD.getWritableDatabase();
 
                     a_builder.setMessage("Confirmar a resolução do lembrete:")
                             .setCancelable(false)
@@ -85,9 +87,13 @@ public class Lembretes extends AppCompatActivity {
 
 
 
-                                        Toast.makeText(Lembretes.this, "Teste!", Toast.LENGTH_LONG).show();
 
-
+                                        String linha = (String) lembretes.getItemAtPosition(position);
+                                        String[] tokens = linha.split("-");
+                                        String id_string = tokens[0].replace(" ","");
+                                        int id = Integer.parseInt(id_string);
+                                        ajudanteBD.EditarLembrete(id);
+                                       startActivity(menuLem);
 
                                 }
                             })
