@@ -118,6 +118,7 @@ public class GPSTracker extends Service implements LocationListener {
             e.printStackTrace();
         }
         System.out.println("saiu bem");
+        System.out.println("teste " + location.toString());
         return location;
     }
 
