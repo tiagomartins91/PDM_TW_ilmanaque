@@ -58,7 +58,7 @@ public class Receiver extends BroadcastReceiver {
                     PendingIntent p1 = PendingIntent.getActivity(context,0123,intento,0);
 
                     NotificationCompat.Builder nbuilder = new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setSmallIcon(R.mipmap.icon_app)
                             .setContentTitle("Lembrete")
                             .setContentText(queryres.getString(1))
                             .setVibrate(pattern)
