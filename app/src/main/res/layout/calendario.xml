@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -7,19 +7,42 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/nome_mes"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/compactcalendar_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/compactcalendar_view"
         android:layout_width="fill_parent"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
         android:layout_height="250dp"
-        app:compactCalendarTargetHeight="250dp"
-        app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="#000"
-        app:compactCalendarTextColor="#fff"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:compactCalendarBackgroundColor="#009933"
         app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#000"
         app:compactCalendarMultiEventIndicatorColor="#fff"
-        />
-</LinearLayout>
+        app:compactCalendarTargetHeight="250dp"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarTextSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

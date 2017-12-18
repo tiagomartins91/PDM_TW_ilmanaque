@@ -13,7 +13,7 @@
     <string name="data">ano/mes/dia</string>
     <string name="registar">Registar</string>
     <string name="atividades">Atividades</string>
-    <string name="metereologia">Metereologia</string>
+    <string name="meteorologia">Meteorologia</string>
     <string name="selecionar_atividade_a_editar">Selecionar atividade a editar</string>
     <string name="adicionar">Adicionar</string>
     <string name="definir_lembrete">Definir Lembrete</string>
@@ -23,7 +23,9 @@
     <string name="manual">Manual</string>
     <string name="editar">Editar</string>
     <string name="lembretes">Lembretes</string>
-    <string name="calendario">Calendario</string>
+    <string name="calendario">Calendário</string>
+    <string name="novo_lembrete">Novo Lembrete</string>
+    <string name="textview">TextView</string>
 
 
 </resources>

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
@@ -22,6 +23,7 @@ public class Calendario extends AppCompatActivity {
     CompactCalendarView compactCalendar;
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
     Auxiliar aux = new Auxiliar();
+    TextView nome_mes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +31,15 @@ public class Calendario extends AppCompatActivity {
         setContentView(R.layout.calendario);
 
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(null);
+        //final ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(false);
+        //actionBar.setTitle(null);
 
+        nome_mes = (TextView) findViewById(R.id.nome_mes);
         compactCalendar = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendar.setUseThreeLetterAbbreviation(true);
+
+        //nome_mes.setText(dateFormatMonth);
 
 
         JsonTaskWeek teste = new JsonTaskWeek();
@@ -90,7 +95,9 @@ public class Calendario extends AppCompatActivity {
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
+                //actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
+
+                nome_mes.setText(dateFormatMonth.format(firstDayOfNewMonth));
             }
         });
     }
