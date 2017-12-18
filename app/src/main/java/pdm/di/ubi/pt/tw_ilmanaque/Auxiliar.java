@@ -1,4 +1,6 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
+import android.graphics.Color;
+
 import java.util.Calendar;
 /**
  * Created by saraiva on 17-12-2017.
@@ -21,9 +23,28 @@ public class Auxiliar {
         if(s.equals("Clouds"))
             return "Céu nublado";
 
+        if(s.equals("Snow"))
+            return "Neve";
+
         return s;
     }
 
+
+    int getColor (String s){
+        if (s.equals("Céu Limpo"))
+            return Color.GREEN;
+
+        if(s.equals("Chuva"))
+            return Color.BLUE;
+
+        if(s.equals("Céu nublado"))
+            return Color.GRAY;
+
+        if(s.equals("Neve"))
+            return Color.WHITE;
+
+        return Color.RED;
+    }
 
 
 

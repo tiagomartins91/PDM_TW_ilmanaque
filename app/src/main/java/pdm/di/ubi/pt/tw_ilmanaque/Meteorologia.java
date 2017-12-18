@@ -3,6 +3,7 @@ package pdm.di.ubi.pt.tw_ilmanaque;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -11,6 +12,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import org.w3c.dom.Text;
 
@@ -70,6 +73,7 @@ public class Meteorologia extends AppCompatActivity {
         System.out.println("Lat e long " + latitude + " " + longiture);
 
         jsonTaskweek.execute("http://api.openweathermap.org/data/2.5/forecast?lat=" + String.valueOf(latitude) + "&lon="  + String.valueOf(longiture) + "&appid=1e49fc78a012d7a8d3cff3325ab72334");
+
 
     }
 
