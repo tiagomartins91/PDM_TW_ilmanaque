@@ -131,6 +131,7 @@ public class Lembretes extends AppCompatActivity {
 
         final AjudanteBD ajudanteBD= new AjudanteBD(this);
         final SQLiteDatabase db = ajudanteBD.getWritableDatabase();
+        final EditText setData;
 
 
         // set dialog message
@@ -139,6 +140,16 @@ public class Lembretes extends AppCompatActivity {
                 .setPositiveButton("Criar",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+
+
+                                setData = (EditText) findViewById(R.id.);
+                                mEditInit.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        showDialog(DATEINIT_DIALOG);
+                                    }
+
+                                });
 
 
 
