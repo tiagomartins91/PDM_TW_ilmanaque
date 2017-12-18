@@ -26,6 +26,9 @@ public class Auxiliar {
         if(s.equals("Snow"))
             return "Neve";
 
+        if(s.equals("Drizzle"))
+            return "Chuva";
+
         return s;
     }
 
@@ -42,6 +45,7 @@ public class Auxiliar {
 
         if(s.equals("Neve"))
             return Color.WHITE;
+
 
         return Color.RED;
     }

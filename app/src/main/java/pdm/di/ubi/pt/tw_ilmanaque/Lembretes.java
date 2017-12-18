@@ -142,14 +142,6 @@ public class Lembretes extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
 
 
-                                setData = (EditText) findViewById(R.id.);
-                                mEditInit.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        showDialog(DATEINIT_DIALOG);
-                                    }
-
-                                });
 
 
 

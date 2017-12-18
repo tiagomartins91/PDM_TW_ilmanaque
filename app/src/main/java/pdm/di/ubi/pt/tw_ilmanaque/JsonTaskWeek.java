@@ -89,7 +89,6 @@ public class JsonTaskWeek extends AsyncTask<String, Void, ArrayList<TempoSemanal
                     String day = sdf.format(calendar.getTime());
                     arrayDays.add(day);
                 }
-                System.out.println("teste doinbk " + arrayDays.size());
 
                 int flag=0;
 

@@ -2,6 +2,7 @@ package pdm.di.ubi.pt.tw_ilmanaque;
 
 import android.os.AsyncTask;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +19,7 @@ import java.net.URL;
 
 public class JsonTaskToday extends AsyncTask<String, Void, String> {
 
-
+Auxiliar aux = new Auxiliar();
     @Override
     protected String doInBackground(String... strings) {
 
@@ -61,20 +62,42 @@ public class JsonTaskToday extends AsyncTask<String, Void, String> {
             JSONObject jsonObject = new JSONObject(result);
             JSONObject weatherData = new JSONObject(jsonObject.getString("main"));
 
+            JSONArray arrayWeather = jsonObject.getJSONArray("weather");
+            JSONObject dataFromArray = arrayWeather.getJSONObject(0);
+            String weatherCondition = dataFromArray.getString("main");
+
+            String condicaoDoTempo = aux.parseWeatherCondition(weatherCondition);
+
             double temperature = Double.parseDouble(weatherData.getString("temp"));
             double temperaturaCelsius = temperature - 273.15;
             String placeName = jsonObject.getString("name");
 
 
 
-        /** usar estes como forma de ver cm meter esta temp
-            Meteorologia.ceuView.setText(parsedEstadoDoCeu);
-            Meteorologia.temperatureView.setText(String.valueOf(df.format(temp_max_hoje))+ "ºC");
-            Meteorologia.placeView.setText(String.valueOf(cidade));
-            Meteorologia.temperatureminView.setText(String.valueOf(df.format(temp_mim_hoje))+"ºC");
-            Meteorologia.humidityView.setText(String.valueOf(humidade) + "%");
 
-         **/
+            MainActivity.cidade_name.setText(placeName);
+            MainActivity.temperatura.setText(String.valueOf(temperaturaCelsius)+"ºC");
+
+            if(condicaoDoTempo.equals("Céu Limpo")) {
+                MainActivity.tempo.setImageResource(R.mipmap.icon_sun);
+            }
+            else if(condicaoDoTempo.equals("Neve")) {
+                MainActivity.tempo.setImageResource(R.mipmap.icon_snow);
+            }
+            else if(condicaoDoTempo.equals("Chuva")) {
+                MainActivity.tempo.setImageResource(R.mipmap.icon_rain);
+            }
+            else if(condicaoDoTempo.equals("Céu nublado")) {
+                MainActivity.tempo.setImageResource(R.mipmap.icon_clouds);
+            }
+            else {
+                MainActivity.tempo.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+
+            }
+
+
+
+
 
         }catch (JSONException e) {
             e.printStackTrace();
