@@ -30,16 +30,13 @@ public class Calendario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendario);
 
-
-        //final ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(false);
-        //actionBar.setTitle(null);
-
         nome_mes = (TextView) findViewById(R.id.nome_mes);
         compactCalendar = (CompactCalendarView) findViewById(R.id.compactcalendar_view);
         compactCalendar.setUseThreeLetterAbbreviation(true);
 
-        //nome_mes.setText(dateFormatMonth);
+        Date d = new Date();
+        nome_mes.setText(dateFormatMonth.format(d));
+
 
 
         JsonTaskWeek teste = new JsonTaskWeek();
