@@ -65,6 +65,17 @@ public class JsonTaskToday extends AsyncTask<String, Void, String> {
             double temperaturaCelsius = temperature - 273.15;
             String placeName = jsonObject.getString("name");
 
+
+
+        /** usar estes como forma de ver cm meter esta temp
+            Meteorologia.ceuView.setText(parsedEstadoDoCeu);
+            Meteorologia.temperatureView.setText(String.valueOf(df.format(temp_max_hoje))+ "ºC");
+            Meteorologia.placeView.setText(String.valueOf(cidade));
+            Meteorologia.temperatureminView.setText(String.valueOf(df.format(temp_mim_hoje))+"ºC");
+            Meteorologia.humidityView.setText(String.valueOf(humidade) + "%");
+
+         **/
+
         }catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,11 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
+
+import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,25 +20,27 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by joaosaraiva on 15-12-2017.
  */
 
-public class JsonTaskWeek extends AsyncTask<String, Void, String> {
+public class JsonTaskWeek extends AsyncTask<String, Void, ArrayList<TempoSemanal>> {
 
-    Auxiliar aux;
+    Auxiliar aux = new Auxiliar();
+    ArrayList<TempoSemanal> arrayTempoSemanal = new ArrayList<>();
 
 
     @Override
-    protected String doInBackground(String... strings) {
+    protected ArrayList<TempoSemanal> doInBackground(String... strings) {
 
         String result =""; // dados do json
         URL url;
         HttpURLConnection urlConnection = null;
-
 
         try {
 
@@ -57,7 +64,93 @@ public class JsonTaskWeek extends AsyncTask<String, Void, String> {
                 data = reader.read();
             }
 
-            return result;
+
+
+            try {
+
+                DecimalFormat df = new DecimalFormat("#.###");
+                JSONObject jsonObject = new JSONObject(result);
+                JSONObject jsonCity = new JSONObject(jsonObject.getString("city"));
+                String cidade = jsonCity.getString("name");
+
+
+                //lista dos dias
+                JSONArray jsonList = new JSONArray(jsonObject.getString("list"));
+
+                //pegar na data de hoje
+                Date todayDate = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+
+                //criação dos arrays dos dias seguintes ao dia de hoje
+                ArrayList<String> arrayDays = new ArrayList<>();
+                for (int i = 1; i < 6; i++) {
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.add(Calendar.DATE, i);
+                    String day = sdf.format(calendar.getTime());
+                    arrayDays.add(day);
+                }
+
+                int flag=0;
+
+                for(int i = 0; i<jsonList.length(); i++){
+                    TempoSemanal oTempoSemanal = new TempoSemanal();
+
+                    JSONObject oJson = jsonList.getJSONObject(i);
+                    String date_string = oJson.getString("dt_txt");
+                    Date date_date = sdf.parse(date_string);
+                    String final_date = sdf.format(date_date);//usar esta e o equals
+
+
+                    if(final_date.equals(arrayDays.get(0)))
+                    {
+                        flag++;
+                        if(flag==5) {
+
+                            JSONObject ojsonMainObject = oJson.getJSONObject("main");
+
+                            double temp_media_fake = Double.parseDouble(ojsonMainObject.getString("temp"))-273.15;
+
+                            int humidade = Integer.parseInt(ojsonMainObject.getString("humidity"));
+
+                            JSONArray jsonArray = oJson.getJSONArray("weather");
+
+                            JSONObject ojsconObjectWeather = jsonArray.getJSONObject(0);
+
+                            String estadoDoCeu = ojsconObjectWeather.getString("main");
+
+                            String dt_string = oJson.getString("dt");
+
+                            oTempoSemanal.setTemp(temp_media_fake);
+                            oTempoSemanal.setHumity(humidade);
+                            oTempoSemanal.setWeather(aux.parseWeatherCondition(estadoDoCeu));
+                            oTempoSemanal.setDt(dt_string);
+
+                            oTempoSemanal.setCity_name(cidade);//add ao objeto
+
+                            arrayTempoSemanal.add(oTempoSemanal);
+
+                            flag=0;
+                            arrayDays.remove(0);
+
+                        }
+                    }
+
+                }
+
+                aux = new Auxiliar();
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+
+
+            return arrayTempoSemanal;
 
         } catch (MalformedURLException e) {//ver q execao meter aqui
             e.printStackTrace();
@@ -69,7 +162,7 @@ public class JsonTaskWeek extends AsyncTask<String, Void, String> {
         return null;
     }
 
-
+/**
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
@@ -79,67 +172,72 @@ public class JsonTaskWeek extends AsyncTask<String, Void, String> {
             DecimalFormat df = new DecimalFormat("#.###");
             JSONObject jsonObject = new JSONObject(result);
             JSONObject jsonCity = new JSONObject(jsonObject.getString("city"));
-
             String cidade = jsonCity.getString("name");
-            System.out.println("CIDADE: " + cidade);
+
+
 
 
             //lista dos dias
             JSONArray jsonList = new JSONArray(jsonObject.getString("list"));
 
-            //fazer presivao para HOJE (3h dps do momento atual)
-            JSONObject jsonDiaHoje = jsonList.getJSONObject(1);
-            JSONObject jsonMainObject = jsonDiaHoje.getJSONObject("main");
+            //pegar na data de hoje
+            Date todayDate = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
 
-            double temp_max_hoje = Double.parseDouble(jsonMainObject.getString("temp_max"))-273.15;
-            double temp_mim_hoje = Double.parseDouble(jsonMainObject.getString("temp_min"))-273.15;
-            int humidade = Integer.parseInt(jsonMainObject.getString("humidity"));
+            //criação dos arrays dos dias seguintes ao dia de hoje
+            ArrayList<String> arrayDays = new ArrayList<>();
+            for (int i = 1; i < 6; i++) {
+                Calendar calendar = new GregorianCalendar();
+                calendar.add(Calendar.DATE, i);
+                String day = sdf.format(calendar.getTime());
+                arrayDays.add(day);
+
+            }
+
+            int flag=0;
+
+            for(int i = 0; i<jsonList.length(); i++){
+                JSONObject oJson = jsonList.getJSONObject(i);
+                String date_string = oJson.getString("dt_txt");
+                Date date_date = sdf.parse(date_string);
+                String final_date = sdf.format(date_date);//usar esta e o equals
 
 
-            JSONArray jsonArrayWeather = jsonDiaHoje.getJSONArray("weather");
+                if(final_date.equals(arrayDays.get(0)))
+                {
+                    flag++;
+                    if(flag==5) {
+                        System.out.println("Isto tem q ter acontecido no 4º i " + i + " " + arrayDays.get(0));
+                        JSONObject ojsonMainObject = oJson.getJSONObject("main");
+                        double temp_media_fake = Double.parseDouble(ojsonMainObject.getString("temp"))-273.15;
+                        int humidade = Integer.parseInt(ojsonMainObject.getString("humidity"));
+                        JSONArray jsonArray = oJson.getJSONArray("weather");
+                        JSONObject ojsconObjectWeather = jsonArray.getJSONObject(0);
+                        String estadoDoCeu = ojsconObjectWeather.getString("main");
+                        String dt_string = oJson.getString("dt");
 
-            JSONObject jsonObjectWheather = jsonArrayWeather.getJSONObject(0);
-            String estadoDoCeu = jsonObjectWheather.getString("main");
+                        dt_time.add(dt_string);
+                        flag=0;
+                        arrayDays.remove(0);
+                    }
+                }
+
+            }
 
             aux = new Auxiliar();
-            String parsedEstadoDoCeu = aux.parseWeatherCondition(estadoDoCeu);
-
-            String teste = jsonDiaHoje.getString("dt_txt");
-
-
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = new Date();
-            Date date2 = sdf.parse(teste);//chave!
-
-
-
-
-            String currentDateandTime = sdf.format(date);
-            String data2 = sdf.format(date2);
-
-            System.out.println(data2);
-
-            if(date.before(date2))
-                System.out.println("after");
-
-            System.out.println(currentDateandTime);
-
-
-            Meteorologia.ceuView.setText(parsedEstadoDoCeu);
-            Meteorologia.temperatureView.setText(String.valueOf(df.format(temp_max_hoje))+ "ºC");
-            Meteorologia.placeView.setText(String.valueOf(cidade));
-            Meteorologia.temperatureminView.setText(String.valueOf(df.format(temp_mim_hoje))+"ºC");
-            Meteorologia.humidityView.setText(String.valueOf(humidade) + "%");
-
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
+
+
+
+    public ArrayList<String> getArray(){
+        return dt_time;
+    }
+**/
+
 }
