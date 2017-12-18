@@ -67,8 +67,9 @@ public class RegistoAtividades extends AppCompatActivity {
     public void RegistarAtividade (View v){
 
         final AjudanteBD ajudanteBD = new AjudanteBD(this);
-        final Intent menuP = new Intent(this, MainActivity.class);
+        final Intent menuP = new Intent(this, Atividades.class);
         int flag = 0;
+        final Auxiliar aux = new Auxiliar();
 
         if (flag == 0) { // verificação se as caixas estão vazias
 
@@ -163,28 +164,7 @@ public class RegistoAtividades extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
-                                        boolean inserirsucesso = ajudanteBD.RegistarAtividade(
-                                                nomeplanta.getText().toString(),
-                                                terreno.getText().toString(),
-                                                Integer.parseInt(quantidade.getText().toString()),
-                                                data.getText().toString());
 
-                                        int id_atividade = ajudanteBD.getIdAtividade(nomeplanta.getText().toString());
-
-
-                                        ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(), lembrete_data.getText().toString(), 0, id_atividade);
-
-
-                                        if (inserirsucesso == true) {
-
-
-                                            Toast.makeText(RegistoAtividades.this, "Atividade registada com sucesso!", Toast.LENGTH_SHORT).show();
-                                            startActivity(menuP);
-
-                                        } else {
-
-                                            Toast.makeText(RegistoAtividades.this, "Erro!", Toast.LENGTH_LONG).show();
-                                        }
 
 
                                     }
@@ -196,8 +176,47 @@ public class RegistoAtividades extends AppCompatActivity {
                                     }
                                 });
 
-                AlertDialog dialog = mbuilder.create();
+                final AlertDialog dialog = mbuilder.create();
                 dialog.show();
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Boolean naofechardiaglog = false;
+
+                        if(aux.verify(lembrete_data.getText().toString())== 1) {
+
+                            boolean lembretesucesso = ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(),
+                                    lembrete_data.getText().toString(), 0, -1); //-1 se não estiver associada a nenhuma atividade
+
+                            naofechardiaglog = true;
+                            if (lembretesucesso == true) {
+
+
+                                Toast.makeText(RegistoAtividades.this, "Atividade registada com sucesso!", Toast.LENGTH_SHORT).show();
+                                startActivity(menuP);
+
+                            } else {
+
+                                Toast.makeText(RegistoAtividades.this, "Erro!", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                        else {
+
+                            lembrete_data.setError("Formato de data errado - yyyy/mm/dd");
+
+                        }
+
+                        if(naofechardiaglog)
+                            dialog.dismiss();
+
+                    }
+                });
+
+
+
 
             }
 
