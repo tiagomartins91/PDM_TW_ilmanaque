@@ -1,11 +1,15 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -114,7 +118,17 @@ public class RegistoAtividades extends AppCompatActivity {
 
                 int id_atividade = ajudanteBD.getIdAtividade(nomeplanta.getText().toString());
 
-                ajudanteBD.RegistarLembrete("Teste", "2018-01-02", 0, id_atividade);
+                ajudanteBD.RegistarLembrete("Teste", "2018/01/02", 0, id_atividade);
+
+                AlarmManager alarme = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+
+                Receiver receiver = new Receiver();
+                IntentFilter filter = new IntentFilter("ALARM_ACTION");
+                registerReceiver(receiver,filter);
+
+                Intent intento = new Intent("ALARM_ACTION");
+                PendingIntent operation = PendingIntent.getBroadcast(this,0,intento,0);
+                alarme.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 9000, operation);
 
                 if (inserirsucesso == true) {
 
@@ -194,8 +208,7 @@ public class RegistoAtividades extends AppCompatActivity {
     }
 
 
-    private class LayoutInflater {
-    }
+
 }
 
 

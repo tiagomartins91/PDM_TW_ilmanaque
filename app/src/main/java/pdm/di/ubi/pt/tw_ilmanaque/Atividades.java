@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -36,7 +37,7 @@ public class Atividades extends AppCompatActivity {
 
         while (!queryres.isAfterLast()){
 
-            atividades_array.add(queryres.getString(1)); //nome da atividade
+            atividades_array.add(queryres.getString(0) + " - "  + queryres.getString(1)); //id + nome da atividade
             queryres.moveToNext();
 
         }
@@ -50,24 +51,26 @@ public class Atividades extends AppCompatActivity {
         atividades.setAdapter(adapter);
 
 
-       /*
 
-        pratos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        atividades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String nome = (String) pratos.getItemAtPosition(position);
 
+                String linha = (String) atividades.getItemAtPosition(position);
+                String[] tokens = linha.split("-");
+                String id_string = tokens[0].replace(" ","");
 
                 Bundle bundle = new Bundle();
-                bundle.putString("nome", nome);
-                Intent showinfoprato = new Intent(getApplicationContext(), ConfirmRemoverPrato.class);
-                showinfoprato.putExtras(bundle); // anexar extras ao intento para ir para a outra view
-                startActivity(showinfoprato);
+                bundle.putString("id", id_string);
+                Intent editaratividade = new Intent(getApplicationContext(), EditarAtividade.class);
+                editaratividade.putExtras(bundle); // anexar extras ao intento para ir para a outra view
+                startActivity(editaratividade);
             }
         });
 
-        */
+
 
     }
 

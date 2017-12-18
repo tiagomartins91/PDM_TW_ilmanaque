@@ -21,5 +21,9 @@
     <string name="ano_mes_dia">ano/mes/dia</string>
     <string name="autom_tico">Automático</string>
     <string name="manual">Manual</string>
+    <string name="editar">Editar</string>
+    <string name="lembretes">Lembretes</string>
+    <string name="calendario">Calendario</string>
+
 
 </resources>

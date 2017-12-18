@@ -74,12 +74,12 @@ public class AjudanteBD extends SQLiteOpenHelper {
     }
 
 
-    public boolean RegistarAtividade (String nomeplanta, String terreno, int quantidade, String data){
+    public boolean RegistarAtividade (String nomeatividade, String terreno, int quantidade, String data){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues novatividade = new ContentValues();
-        novatividade.put(T1_COLUNA2, nomeplanta);
+        novatividade.put(T1_COLUNA2, nomeatividade);
         novatividade.put(T1_COLUNA3, terreno);
         novatividade.put(T1_COLUNA4, quantidade);
         novatividade.put(T1_COLUNA5, data);
@@ -100,18 +100,34 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
     }
 
-    public int getIdAtividade (String nomeplanta){
 
-        Cursor queryres;
+    public boolean EditarAtividade(int id_atividade, String nomedaatividade, String terreno, int quant, String data){ //update dos campos da atividade
+
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        queryres = db.rawQuery("select id "  + " from  " + NOME_TABELA1 + " where " + T1_COLUNA2 + " = " + "'"+nomeplanta+"'", null);
+        ContentValues newValues = new ContentValues();
+        newValues.put(T1_COLUNA2, nomedaatividade);
+        newValues.put(T1_COLUNA3, terreno);
+        newValues.put(T1_COLUNA4, quant);
+        newValues.put(T1_COLUNA5, data);
 
-        queryres.moveToFirst();
 
-        return queryres.getInt(0);
+        long resultado = db.update(NOME_TABELA1,newValues, T1_COLUNA1 +  " = " + "'"+id_atividade+"'" , null);
+
+
+        db.close();
+
+
+        if (resultado==-1)
+            return false;
+
+
+        return true;
+
     }
+
+
 
 
     public boolean RegistarLembrete (String descricao, String data, int estado, int id_atividade){
@@ -150,10 +166,48 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
     }
 
+    public int getIdAtividade (String nomeplanta){
+
+        Cursor queryres;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        queryres = db.rawQuery("select id "  + " from  " + NOME_TABELA1 + " where " + T1_COLUNA2 + " = " + "'"+nomeplanta+"'", null);
+
+        queryres.moveToFirst();
+
+        return queryres.getInt(0);
+    }
+
+    public Cursor showinfoAtividade(int id_atividade){ //ver dados de uma atividade
+
+
+        Cursor queryres;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        queryres = db.rawQuery("select * "  + " from  " + NOME_TABELA1 + " where " + T1_COLUNA1 + " = " + "'"+id_atividade+"'", null);
 
 
 
+        return queryres;
 
+
+    }
+
+    public Cursor getLembretes (){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor queryres;
+
+        queryres = db.rawQuery("select * "  + " from  " + NOME_TABELA2 + " where " + T2_COLUNA4 + " = " + "'"+0+"'", null);
+
+
+        return queryres;
+
+
+    }
 
 
 

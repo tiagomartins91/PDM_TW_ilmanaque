@@ -19,11 +19,15 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    public void abrirMenuRegistoAtividadas(View v){
-        Intent abrirMenuRegistoAtividadas = new Intent(this, RegistoAtividades.class);
-        startActivity(abrirMenuRegistoAtividadas);
+    public void abrirMenuAtividades(View v){
+        Intent abrirMenuAtividades = new Intent(this, Atividades.class);
+        startActivity(abrirMenuAtividades);
     }
 
+    public void abrirLembretes(View v){
+        Intent abrirLembretes = new Intent(this, Lembretes.class);
+        startActivity(abrirLembretes);
+    }
 
 
 
