@@ -3,6 +3,7 @@ package pdm.di.ubi.pt.tw_ilmanaque;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.location.Location;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,35 +42,42 @@ public class Calendario extends AppCompatActivity {
 
         JsonTaskWeek teste = new JsonTaskWeek();
 
-        ArrayList<TempoSemanal> x = new ArrayList<>();
+        GPSTracker gpsTracker = new GPSTracker(this);
+
+        Location location = gpsTracker.getLocation();
+
+        double latitude = location.getLatitude();
+        double longiture = location.getLongitude();
+
+        ArrayList<TempoSemanal> arrayListAssyncTask = new ArrayList<>();
         try {
-            x = teste.execute("http://api.openweathermap.org/data/2.5/forecast?lat=42.9886&lon=-81.2467&appid=1e49fc78a012d7a8d3cff3325ab72334").get();
+            arrayListAssyncTask = teste.execute("http://api.openweathermap.org/data/2.5/forecast?lat="+String.valueOf(latitude)+"&lon="+String.valueOf(longiture)+"&appid=1e49fc78a012d7a8d3cff3325ab72334").get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
 
-        System.out.println(x.toString());
+        System.out.println(arrayListAssyncTask.toString());
 
-        String x0 = x.get(0).getDt()+"000";
+        String x0 = arrayListAssyncTask.get(0).getDt()+"000";
         long n0 = Long.parseLong(x0);
 
 
-        String x1 = x.get(1).getDt() +"000";
+        String x1 = arrayListAssyncTask.get(1).getDt() +"000";
         long n1 = Long.parseLong(x1);
 
-        String x2 = x.get(2).getDt()+"000";
+        String x2 = arrayListAssyncTask.get(2).getDt()+"000";
         long n2 = Long.parseLong(x2);
 
-        String x3 = x.get(3).getDt()+"000";
+        String x3 = arrayListAssyncTask.get(3).getDt()+"000";
         long n3 = Long.parseLong(x3);
 
 
-        Event ev0 = new Event(aux.getColor(x.get(0).getWeather()),  n0, "");
-        Event ev1 = new Event(aux.getColor(x.get(1).getWeather()),  n1, "");
-        Event ev2 = new Event(aux.getColor(x.get(2).getWeather()),  n2, "");
-        Event ev3 = new Event(aux.getColor(x.get(3).getWeather()),  n3, "");
+        Event ev0 = new Event(aux.getColor(arrayListAssyncTask.get(0).getWeather()),  n0, "");
+        Event ev1 = new Event(aux.getColor(arrayListAssyncTask.get(1).getWeather()),  n1, "");
+        Event ev2 = new Event(aux.getColor(arrayListAssyncTask.get(2).getWeather()),  n2, "");
+        Event ev3 = new Event(aux.getColor(arrayListAssyncTask.get(3).getWeather()),  n3, "");
 
         compactCalendar.addEvent(ev0);
         compactCalendar.addEvent(ev1);
@@ -92,7 +100,6 @@ public class Calendario extends AppCompatActivity {
 
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
-                //actionBar.setTitle(dateFormatMonth.format(firstDayOfNewMonth));
 
                 nome_mes.setText(dateFormatMonth.format(firstDayOfNewMonth));
             }
