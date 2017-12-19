@@ -1,6 +1,7 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
@@ -53,28 +54,29 @@ public class MainActivity extends AppCompatActivity{
         }
 
         System.out.println("Data "+ arrayListAssyncTask.get(0).getDate().replaceAll("-","/"));
-        if(arrayListAssyncTask.get(0).getWeather().equals("Chuva")) {
-            boolean lembretesucesso ;
-            lembretesucesso = ajudanteBD.RegistarLembrete("Chuva esperada sem muita necessidade de regar",
-                    arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
+        boolean existe ;
 
-        }
-        else if(!arrayListAssyncTask.get(0).getWeather().equals("Chuva") && arrayListAssyncTask.get(0).getTemp()<25.0 )
-        {
-            boolean lembretesucesso ;
-            lembretesucesso = ajudanteBD.RegistarLembrete("Sem Chuva esperada não se esqueça de regar",
-                    arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
+            if (arrayListAssyncTask.get(0).getWeather().equals("Chuva")) {
+                boolean lembretesucesso;
 
-        }
-        else if(arrayListAssyncTask.get(0).getTemp()>25.0)
-        {
-            boolean lembretesucesso ;
-            lembretesucesso = ajudanteBD.RegistarLembrete("Temperaturas altas, regue com regularidade",
-                    arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
+                existe = ajudanteBD.getLembretesexists(arrayListAssyncTask.get(0).getDate().replaceAll("-", "/"),"Chuva esperada sem muita necessidade de regar");
+                if(!existe)
+                lembretesucesso = ajudanteBD.RegistarLembrete("Chuva esperada sem muita necessidade de regar", arrayListAssyncTask.get(0).getDate().replaceAll("-", "/"), 0, -1);
+
+            } else if (!arrayListAssyncTask.get(0).getWeather().equals("Chuva") && arrayListAssyncTask.get(0).getTemp() < 25.0) {
+                boolean lembretesucesso;
+                existe = ajudanteBD.getLembretesexists(arrayListAssyncTask.get(0).getDate().replaceAll("-", "/"),"Sem Chuva esperada não se esqueça de regar");
+                if(!existe)
+                lembretesucesso = ajudanteBD.RegistarLembrete("Sem Chuva esperada não se esqueça de regar", arrayListAssyncTask.get(0).getDate().replaceAll("-", "/"), 0, -1);
+
+            } else if (arrayListAssyncTask.get(0).getTemp() > 25.0) {
+                boolean lembretesucesso;
+                existe = ajudanteBD.getLembretesexists(arrayListAssyncTask.get(0).getDate().replaceAll("-", "/"),"Temperaturas altas, regue com regularidade");
+                if(!existe)
+                lembretesucesso = ajudanteBD.RegistarLembrete("Temperaturas altas, regue com regularidade", arrayListAssyncTask.get(0).getDate().replaceAll("-", "/"), 0, -1);
 
 
-
-        }
+            }
 
     }
 
