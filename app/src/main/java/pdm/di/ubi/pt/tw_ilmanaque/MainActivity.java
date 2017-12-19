@@ -1,6 +1,7 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity{
 
         double latitude = location.getLatitude();
         double longiture = location.getLongitude();
-
+        final AjudanteBD ajudanteBD= new AjudanteBD(this);
+        final SQLiteDatabase db = ajudanteBD.getWritableDatabase();
         JsonTaskToday jsonExtracter = new JsonTaskToday();
 
         jsonExtracter.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + String.valueOf(latitude) + "&lon="  + String.valueOf(longiture) + "&appid=1e49fc78a012d7a8d3cff3325ab72334");
@@ -50,6 +52,29 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
+        System.out.println("Data "+ arrayListAssyncTask.get(0).getDate().replaceAll("-","/"));
+        if(arrayListAssyncTask.get(0).getWeather().equals("Chuva")) {
+            boolean lembretesucesso ;
+            lembretesucesso = ajudanteBD.RegistarLembrete("Chuva esperada sem muita necessidade de regar",
+                    arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
+
+        }
+        else if(!arrayListAssyncTask.get(0).getWeather().equals("Chuva"))
+        {
+            boolean lembretesucesso ;
+            lembretesucesso = ajudanteBD.RegistarLembrete("Sem Chuva esperada não se esqueça de regar",
+                    arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
+
+        }
+        else if(arrayListAssyncTask.get(0).getTemp()>25.0)
+        {
+            boolean lembretesucesso ;
+            lembretesucesso = ajudanteBD.RegistarLembrete("Temperaturas altas, regue com regularidade",
+                    arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
+
+
+
+        }
 
     }
 
