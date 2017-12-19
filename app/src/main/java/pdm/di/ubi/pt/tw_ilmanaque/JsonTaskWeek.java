@@ -121,11 +121,16 @@ public class JsonTaskWeek extends AsyncTask<String, Void, ArrayList<TempoSemanal
                             String estadoDoCeu = ojsconObjectWeather.getString("main");
 
                             String dt_string = oJson.getString("dt");
+                            //
+
+
+                            //
 
                             oTempoSemanal.setTemp(temp_media_fake);
                             oTempoSemanal.setHumity(humidade);
                             oTempoSemanal.setWeather(aux.parseWeatherCondition(estadoDoCeu));
                             oTempoSemanal.setDt(dt_string);
+                            oTempoSemanal.setDate(final_date);
 
                             oTempoSemanal.setCity_name(cidade);//add ao objeto
 

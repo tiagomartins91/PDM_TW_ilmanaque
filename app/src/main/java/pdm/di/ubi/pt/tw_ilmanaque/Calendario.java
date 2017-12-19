@@ -7,6 +7,7 @@ import android.location.Location;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,14 @@ public class Calendario extends AppCompatActivity {
 
     CompactCalendarView compactCalendar;
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
     Auxiliar aux = new Auxiliar();
     TextView nome_mes;
+
+    TextView tempTV;
+    TextView humityTV;
+    TextView cidadeTV;
+    ImageView imgV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,7 @@ public class Calendario extends AppCompatActivity {
 
 
 
+/**
         JsonTaskWeek teste = new JsonTaskWeek();
 
         GPSTracker gpsTracker = new GPSTracker(this);
@@ -57,42 +65,85 @@ public class Calendario extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+**/
 
-        System.out.println(arrayListAssyncTask.toString());
 
-        String x0 = arrayListAssyncTask.get(0).getDt()+"000";
+        System.out.println(MainActivity.arrayListAssyncTask.toString());
+
+        String x0 = MainActivity.arrayListAssyncTask.get(0).getDt()+"000";
         long n0 = Long.parseLong(x0);
 
 
-        String x1 = arrayListAssyncTask.get(1).getDt() +"000";
+        String x1 = MainActivity.arrayListAssyncTask.get(1).getDt() +"000";
         long n1 = Long.parseLong(x1);
 
-        String x2 = arrayListAssyncTask.get(2).getDt()+"000";
+        String x2 = MainActivity.arrayListAssyncTask.get(2).getDt()+"000";
         long n2 = Long.parseLong(x2);
 
-        String x3 = arrayListAssyncTask.get(3).getDt()+"000";
+        String x3 = MainActivity.arrayListAssyncTask.get(3).getDt()+"000";
         long n3 = Long.parseLong(x3);
 
 
-        Event ev0 = new Event(aux.getColor(arrayListAssyncTask.get(0).getWeather()),  n0, "");
-        Event ev1 = new Event(aux.getColor(arrayListAssyncTask.get(1).getWeather()),  n1, "");
-        Event ev2 = new Event(aux.getColor(arrayListAssyncTask.get(2).getWeather()),  n2, "");
-        Event ev3 = new Event(aux.getColor(arrayListAssyncTask.get(3).getWeather()),  n3, "");
+        Event ev0 = new Event(aux.getColor(MainActivity.arrayListAssyncTask.get(0).getWeather()),  n0, "");
+        Event ev1 = new Event(aux.getColor(MainActivity.arrayListAssyncTask.get(1).getWeather()),  n1, "");
+        Event ev2 = new Event(aux.getColor(MainActivity.arrayListAssyncTask.get(2).getWeather()),  n2, "");
+        Event ev3 = new Event(aux.getColor(MainActivity.arrayListAssyncTask.get(3).getWeather()),  n3, "");
 
         compactCalendar.addEvent(ev0);
         compactCalendar.addEvent(ev1);
         compactCalendar.addEvent(ev2);
         compactCalendar.addEvent(ev3);
 
+        final ArrayList<TempoSemanal> finalArrayListAssyncTask = MainActivity.arrayListAssyncTask;
+
         compactCalendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
                 Context context = getApplicationContext();
 
-                if (dateClicked.toString().compareTo("Fri Oct 21 00:00:00 AST 2017") == 0) {
-                    Toast.makeText(context, "Teachers' Professional Day", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(context, "No Events Planned for that day", Toast.LENGTH_SHORT).show();
+                String dateClickedNF = sdf.format(dateClicked);
+
+                tempTV = (TextView) findViewById(R.id.tempTV);
+                humityTV = (TextView) findViewById(R.id.humidityTV);
+                cidadeTV = (TextView) findViewById(R.id.cidadeTV);
+                imgV = (ImageView) findViewById(R.id.imageView);
+
+
+                if (dateClickedNF.equals(finalArrayListAssyncTask.get(0).getDate())) {
+                    tempTV.setText(String.valueOf(finalArrayListAssyncTask.get(0).getTemp()));
+                    humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(0).getHumity())+"%");
+                    cidadeTV.setText(finalArrayListAssyncTask.get(0).getCity_name());
+
+                    if(finalArrayListAssyncTask.get(0).getWeather().equals("Céu Limpo")) {
+                        imgV.setImageResource(R.mipmap.icon_sun);
+                    }
+                    else if(finalArrayListAssyncTask.get(0).getWeather().equals("Neve")) {
+                        imgV.setImageResource(R.mipmap.icon_snow);
+                    }
+                    else if(finalArrayListAssyncTask.get(0).getWeather().equals("Chuva")) {
+                        imgV.setImageResource(R.mipmap.icon_rain);
+                    }
+                    else if(finalArrayListAssyncTask.get(0).getWeather().equals("Céu nublado")) {
+                        imgV.setImageResource(R.mipmap.icon_clouds);
+                    }
+                    else {
+                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+
+                    }
+
+                }
+                else if (dateClickedNF.equals(finalArrayListAssyncTask.get(1).getDate())){
+
+
+                }
+                else if (dateClicked.equals(finalArrayListAssyncTask.get(2).getDate())){
+
+                }
+                else if (dateClicked.equals(finalArrayListAssyncTask.get(3).getDate())){
+
+                }
+                else {
+                    Toast.makeText(context, "Sem previsão para mostrar", Toast.LENGTH_LONG).show();
                 }
 
 

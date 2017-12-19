@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 
 /**
  * Created by saraiva on 17-12-2017.
@@ -72,11 +73,14 @@ Auxiliar aux = new Auxiliar();
             double temperaturaCelsius = temperature - 273.15;
             String placeName = jsonObject.getString("name");
 
+            DecimalFormat df = new DecimalFormat("#.##");
+
+            String temp_string = df.format(temperaturaCelsius);
 
 
 
             MainActivity.cidade_name.setText(placeName);
-            MainActivity.temperatura.setText(String.valueOf(temperaturaCelsius)+"ºC");
+            MainActivity.temperatura.setText(temp_string+"ºC");
 
             if(condicaoDoTempo.equals("Céu Limpo")) {
                 MainActivity.tempo.setImageResource(R.mipmap.icon_sun);

@@ -1,5 +1,7 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
+import java.util.Date;
+
 /**
  * Created by joaosaraiva on 18-12-2017.
  */
@@ -8,20 +10,29 @@ public class TempoSemanal {
 
     int humity;
     double temp;
-    String dt, city_name, weather;
+    String dt, city_name, weather, date;
+
 
     public TempoSemanal(){
 
     }
 
-    public TempoSemanal(int humity, double temp, String dt, String city_name, String weather) {
+    public TempoSemanal(int humity, double temp, String dt, String city_name, String weatherm, String date) {
         this.humity = humity;
         this.temp = temp;
         this.dt = dt;
         this.city_name = city_name;
         this.weather = weather;
+        this.date = date;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getHumity() {
         return humity;
