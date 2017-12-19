@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        System.out.println("Data "+ arrayListAssyncTask.get(0).getDate().replaceAll("-","/"));
+        //System.out.println("Data "+ arrayListAssyncTask.get(0).getDate().replaceAll("-","/"));
         boolean existe ;
 
             if (arrayListAssyncTask.get(0).getWeather().equals("Chuva")) {
