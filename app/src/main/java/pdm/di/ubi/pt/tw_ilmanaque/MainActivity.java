@@ -30,8 +30,13 @@ public class MainActivity extends AppCompatActivity{
         cidade_name = (TextView) findViewById(R.id.cidadeTV);
         temperatura = (TextView) findViewById(R.id.tempTV);
 
+        GPSTRACKER2 teste = new GPSTRACKER2(this);
+
+        //System.out.println("TAG " + teste.getLocation().toString());
+
+
         GPSTracker gpsTracker = new GPSTracker(this);
-        Location location = gpsTracker.getLocation();
+        Location location = teste.getLocation();//gpsTracker.getLocation();
 
         oCd = new ConnectionDetector(this);
 
