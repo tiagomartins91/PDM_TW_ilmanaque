@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity{
     static TextView cidade_name;
     static TextView temperatura;
     static ArrayList<TempoSemanal> arrayListAssyncTask = new ArrayList<>();
-
+    ConnectionDetector oCd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,26 +30,30 @@ public class MainActivity extends AppCompatActivity{
 
         GPSTracker gpsTracker = new GPSTracker(this);
         Location location = gpsTracker.getLocation();
+        oCd = new ConnectionDetector(this);
 
-        double latitude = location.getLatitude();
-        double longiture = location.getLongitude();
-
-        JsonTaskToday jsonExtracter = new JsonTaskToday();
-
-        jsonExtracter.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + String.valueOf(latitude) + "&lon="  + String.valueOf(longiture) + "&appid=1e49fc78a012d7a8d3cff3325ab72334");
+        if(oCd.isConnected() && location!=null) {
 
 
+            double latitude = location.getLatitude();
+            double longiture = location.getLongitude();
 
-        JsonTaskWeek ojsonTaskWeek = new JsonTaskWeek();
+            JsonTaskToday jsonExtracter = new JsonTaskToday();
 
-        try {
-            arrayListAssyncTask = ojsonTaskWeek.execute("http://api.openweathermap.org/data/2.5/forecast?lat="+String.valueOf(latitude)+"&lon="+String.valueOf(longiture)+"&appid=1e49fc78a012d7a8d3cff3325ab72334").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+            jsonExtracter.execute("http://api.openweathermap.org/data/2.5/weather?lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longiture) + "&appid=1e49fc78a012d7a8d3cff3325ab72334");
+
+
+            JsonTaskWeek ojsonTaskWeek = new JsonTaskWeek();
+
+            try {
+                arrayListAssyncTask = ojsonTaskWeek.execute("http://api.openweathermap.org/data/2.5/forecast?lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longiture) + "&appid=1e49fc78a012d7a8d3cff3325ab72334").get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
         }
-
 
     }
 
