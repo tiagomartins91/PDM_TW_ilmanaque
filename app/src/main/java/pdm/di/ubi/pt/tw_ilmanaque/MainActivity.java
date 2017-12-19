@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity{
                     arrayListAssyncTask.get(0).getDate().replaceAll("-","/"), 0, -1);
 
         }
-        else if(!arrayListAssyncTask.get(0).getWeather().equals("Chuva"))
+        else if(!arrayListAssyncTask.get(0).getWeather().equals("Chuva") && arrayListAssyncTask.get(0).getTemp()<25.0 )
         {
             boolean lembretesucesso ;
             lembretesucesso = ajudanteBD.RegistarLembrete("Sem Chuva esperada não se esqueça de regar",
