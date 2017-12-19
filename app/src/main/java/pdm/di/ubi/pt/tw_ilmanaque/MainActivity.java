@@ -1,7 +1,6 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity{
     static TextView temperatura;
     static ArrayList<TempoSemanal> arrayListAssyncTask = new ArrayList<>();
     ConnectionDetector oCd;
+    int check_flag=0; //var que check se desde que o user ja abriu a app, ja teve gps e net ou n
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +31,12 @@ public class MainActivity extends AppCompatActivity{
         cidade_name = (TextView) findViewById(R.id.cidadeTV);
         temperatura = (TextView) findViewById(R.id.tempTV);
 
-        GPSTRACKER2 teste = new GPSTRACKER2(this);
 
-        //System.out.println("TAG " + teste.getLocation().toString());
+
 
 
         GPSTracker gpsTracker = new GPSTracker(this);
-        Location location = teste.getLocation();//gpsTracker.getLocation();
+        Location location = gpsTracker.getLocation();//gpsTracker.getLocation();
 
         oCd = new ConnectionDetector(this);
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity{
 
 
             }
-
+            check_flag++;
         }
     }
 
@@ -102,8 +102,21 @@ public class MainActivity extends AppCompatActivity{
 
 
     public void abrirCalendario (View v){
-        Intent iIntent = new Intent (this, Calendario.class);
+
+        if(check_flag==0)
+            Toast.makeText(this, "Precisa de conectar ao GPS e a Internet pelo menos uma vez", Toast.LENGTH_SHORT).show();
+        else {
+            Intent iIntent = new Intent(this, Calendario.class);
+            startActivity(iIntent);
+        }
+    }
+
+    public void abrirMainActivity(View v) {
+
+
+        Intent iIntent = new Intent (this, MainActivity.class);
         startActivity(iIntent);
+
     }
 
 

@@ -81,9 +81,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:textSize="20dp"
+        android:text="Sem sinal GPS ou Internet"
         android:textColor="#000"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -91,13 +91,14 @@
         app:layout_constraintTop_toBottomOf="@+id/imagemTempo" />
 
     <TextView
+        android:onClick="abrirMainActivity"
         android:id="@+id/tempTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:text="Clique para dar Refresh"
         android:textColor="#000"
         android:textSize="20dp"
-        android:text="TextView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cidadeTV" />
