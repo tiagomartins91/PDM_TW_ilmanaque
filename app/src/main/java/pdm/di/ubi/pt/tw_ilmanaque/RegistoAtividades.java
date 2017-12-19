@@ -101,6 +101,12 @@ public class RegistoAtividades extends AppCompatActivity {
                 data.requestFocus();
                 data.setError("Campo Obrigatório");
 
+
+            }
+            else if(aux.verify(data.getText().toString())== 0)
+            {
+                data.setError("Formato Errado yyyy/mm/dd");
+
             }
             else
                 flag = 1;
