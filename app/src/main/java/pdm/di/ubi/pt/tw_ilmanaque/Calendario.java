@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -102,15 +103,18 @@ public class Calendario extends AppCompatActivity {
                 Context context = getApplicationContext();
 
                 String dateClickedNF = sdf.format(dateClicked);
+                DecimalFormat df = new DecimalFormat("#.##");
 
                 tempTV = (TextView) findViewById(R.id.tempTV);
                 humityTV = (TextView) findViewById(R.id.humidityTV);
                 cidadeTV = (TextView) findViewById(R.id.cidadeTV);
                 imgV = (ImageView) findViewById(R.id.imageView);
 
+                System.out.println(dateClickedNF);
+
 
                 if (dateClickedNF.equals(finalArrayListAssyncTask.get(0).getDate())) {
-                    tempTV.setText(String.valueOf(finalArrayListAssyncTask.get(0).getTemp()));
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(0).getTemp()));
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(0).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(0).getCity_name());
 
@@ -134,16 +138,84 @@ public class Calendario extends AppCompatActivity {
                 }
                 else if (dateClickedNF.equals(finalArrayListAssyncTask.get(1).getDate())){
 
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(1).getTemp()));
+                    humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(1).getHumity())+"%");
+                    cidadeTV.setText(finalArrayListAssyncTask.get(1).getCity_name());
+
+                    if(finalArrayListAssyncTask.get(1).getWeather().equals("Céu Limpo")) {
+                        imgV.setImageResource(R.mipmap.icon_sun);
+                    }
+                    else if(finalArrayListAssyncTask.get(1).getWeather().equals("Neve")) {
+                        imgV.setImageResource(R.mipmap.icon_snow);
+                    }
+                    else if(finalArrayListAssyncTask.get(1).getWeather().equals("Chuva")) {
+                        imgV.setImageResource(R.mipmap.icon_rain);
+                    }
+                    else if(finalArrayListAssyncTask.get(1).getWeather().equals("Céu nublado")) {
+                        imgV.setImageResource(R.mipmap.icon_clouds);
+                    }
+                    else {
+                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+
+                    }
 
                 }
-                else if (dateClicked.equals(finalArrayListAssyncTask.get(2).getDate())){
+                else if (dateClickedNF.equals(finalArrayListAssyncTask.get(2).getDate())){
+
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(2).getTemp()));
+                    humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(2).getHumity())+"%");
+                    cidadeTV.setText(finalArrayListAssyncTask.get(2).getCity_name());
+
+                    if(finalArrayListAssyncTask.get(2).getWeather().equals("Céu Limpo")) {
+                        imgV.setImageResource(R.mipmap.icon_sun);
+                    }
+                    else if(finalArrayListAssyncTask.get(2).getWeather().equals("Neve")) {
+                        imgV.setImageResource(R.mipmap.icon_snow);
+                    }
+                    else if(finalArrayListAssyncTask.get(2).getWeather().equals("Chuva")) {
+                        imgV.setImageResource(R.mipmap.icon_rain);
+                    }
+                    else if(finalArrayListAssyncTask.get(2).getWeather().equals("Céu nublado")) {
+                        imgV.setImageResource(R.mipmap.icon_clouds);
+                    }
+                    else {
+                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+
+                    }
+
 
                 }
-                else if (dateClicked.equals(finalArrayListAssyncTask.get(3).getDate())){
+                else if (dateClickedNF.equals(finalArrayListAssyncTask.get(3).getDate())){
+
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(3).getTemp()));
+                    humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(3).getHumity())+"%");
+                    cidadeTV.setText(finalArrayListAssyncTask.get(3).getCity_name());
+
+                    if(finalArrayListAssyncTask.get(3).getWeather().equals("Céu Limpo")) {
+                        imgV.setImageResource(R.mipmap.icon_sun);
+                    }
+                    else if(finalArrayListAssyncTask.get(3).getWeather().equals("Neve")) {
+                        imgV.setImageResource(R.mipmap.icon_snow);
+                    }
+                    else if(finalArrayListAssyncTask.get(3).getWeather().equals("Chuva")) {
+                        imgV.setImageResource(R.mipmap.icon_rain);
+                    }
+                    else if(finalArrayListAssyncTask.get(3).getWeather().equals("Céu nublado")) {
+                        imgV.setImageResource(R.mipmap.icon_clouds);
+                    }
+                    else {
+                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+
+                    }
 
                 }
+
                 else {
-                    Toast.makeText(context, "Sem previsão para mostrar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Sem previsão para mostrar", Toast.LENGTH_SHORT).show();
+                    tempTV.setText("");
+                    humityTV.setText("");
+                    cidadeTV.setText("");
+                    imgV.setImageResource(0);
                 }
 
 
