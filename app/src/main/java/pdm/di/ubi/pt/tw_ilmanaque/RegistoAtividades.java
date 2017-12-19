@@ -19,6 +19,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by TiagoMartins on 15/12/2017.
  */
@@ -67,8 +71,9 @@ public class RegistoAtividades extends AppCompatActivity {
     public void RegistarAtividade (View v){
 
         final AjudanteBD ajudanteBD = new AjudanteBD(this);
-        final Intent menuP = new Intent(this, MainActivity.class);
+        final Intent menuP = new Intent(this, Atividades.class);
         int flag = 0;
+        final Auxiliar aux = new Auxiliar();
 
         if (flag == 0) { // verificação se as caixas estão vazias
 
@@ -96,6 +101,12 @@ public class RegistoAtividades extends AppCompatActivity {
                 data.requestFocus();
                 data.setError("Campo Obrigatório");
 
+
+            }
+            else if(aux.verify(data.getText().toString())== 0)
+            {
+                data.setError("Formato Errado yyyy/mm/dd");
+
             }
             else
                 flag = 1;
@@ -118,18 +129,17 @@ public class RegistoAtividades extends AppCompatActivity {
 
                 int id_atividade = ajudanteBD.getIdAtividade(nomeplanta.getText().toString());
 
-                ajudanteBD.RegistarLembrete("Teste", "2018/01/02", 0, id_atividade);
 
-                AlarmManager alarme = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
-                Receiver receiver = new Receiver();
-                IntentFilter filter = new IntentFilter("ALARM_ACTION");
-                registerReceiver(receiver,filter);
+                long ml = System.currentTimeMillis() + (86400000*3);
 
-                Intent intento = new Intent("ALARM_ACTION");
-                PendingIntent operation = PendingIntent.getBroadcast(this,0,intento,0);
-                alarme.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 9000, operation);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
+                // Create a calendar object that will convert the date and time value in milliseconds to date.
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(ml);
+               formatter.format(calendar.getTime());
+                ajudanteBD.RegistarLembrete("Teste", formatter.format(calendar.getTime()), 0, id_atividade);
                 if (inserirsucesso == true) {
 
 
@@ -163,28 +173,7 @@ public class RegistoAtividades extends AppCompatActivity {
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
 
-                                        boolean inserirsucesso = ajudanteBD.RegistarAtividade(
-                                                nomeplanta.getText().toString(),
-                                                terreno.getText().toString(),
-                                                Integer.parseInt(quantidade.getText().toString()),
-                                                data.getText().toString());
 
-                                        int id_atividade = ajudanteBD.getIdAtividade(nomeplanta.getText().toString());
-
-
-                                        ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(), lembrete_data.getText().toString(), 0, id_atividade);
-
-
-                                        if (inserirsucesso == true) {
-
-
-                                            Toast.makeText(RegistoAtividades.this, "Atividade registada com sucesso!", Toast.LENGTH_SHORT).show();
-                                            startActivity(menuP);
-
-                                        } else {
-
-                                            Toast.makeText(RegistoAtividades.this, "Erro!", Toast.LENGTH_LONG).show();
-                                        }
 
 
                                     }
@@ -196,8 +185,47 @@ public class RegistoAtividades extends AppCompatActivity {
                                     }
                                 });
 
-                AlertDialog dialog = mbuilder.create();
+                final AlertDialog dialog = mbuilder.create();
                 dialog.show();
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Boolean naofechardiaglog = false;
+
+                        if(aux.verify(lembrete_data.getText().toString())== 1) {
+
+                            boolean lembretesucesso = ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(),
+                                    lembrete_data.getText().toString(), 0, -1); //-1 se não estiver associada a nenhuma atividade
+
+                            naofechardiaglog = true;
+                            if (lembretesucesso == true) {
+
+
+                                Toast.makeText(RegistoAtividades.this, "Atividade registada com sucesso!", Toast.LENGTH_SHORT).show();
+                                startActivity(menuP);
+
+                            } else {
+
+                                Toast.makeText(RegistoAtividades.this, "Erro!", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                        else {
+
+                            lembrete_data.setError("Formato de data errado - yyyy/mm/dd");
+
+                        }
+
+                        if(naofechardiaglog)
+                            dialog.dismiss();
+
+                    }
+                });
+
+
+
 
             }
 
