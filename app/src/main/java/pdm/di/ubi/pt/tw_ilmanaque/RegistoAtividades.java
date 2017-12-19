@@ -19,6 +19,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by TiagoMartins on 15/12/2017.
  */
@@ -119,18 +123,17 @@ public class RegistoAtividades extends AppCompatActivity {
 
                 int id_atividade = ajudanteBD.getIdAtividade(nomeplanta.getText().toString());
 
-                ajudanteBD.RegistarLembrete("Teste", "2018/01/02", 0, id_atividade);
 
-                AlarmManager alarme = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
 
-                Receiver receiver = new Receiver();
-                IntentFilter filter = new IntentFilter("ALARM_ACTION");
-                registerReceiver(receiver,filter);
+                long ml = System.currentTimeMillis() + (86400000*3);
 
-                Intent intento = new Intent("ALARM_ACTION");
-                PendingIntent operation = PendingIntent.getBroadcast(this,0,intento,0);
-                alarme.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 9000, operation);
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
+                // Create a calendar object that will convert the date and time value in milliseconds to date.
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(ml);
+               formatter.format(calendar.getTime());
+                ajudanteBD.RegistarLembrete("Teste", formatter.format(calendar.getTime()), 0, id_atividade);
                 if (inserirsucesso == true) {
 
 

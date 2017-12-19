@@ -121,7 +121,7 @@ public class Lembretes extends AppCompatActivity {
 
     public void abrirNovoLembrete (View v){
         final Auxiliar aux = new Auxiliar();
-        final AlertDialog.Builder mbuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder mbuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.custom_dialog_lembrete, null);
         mbuilder.setView(mView);
 
@@ -142,6 +142,30 @@ public class Lembretes extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
 
 
+
+
+
+                                 boolean lembretesucesso = ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(),
+                                         lembrete_data.getText().toString(), 0, -1); //-1 se não estiver associada a nenhuma atividade
+                                         if(aux.verify(lembrete_data.getText().toString())== 1)
+                                         {
+                                             if (lembretesucesso == true) {
+
+
+                                                 Toast.makeText(Lembretes.this, "Lembrete registado com sucesso!", Toast.LENGTH_SHORT).show();
+                                                 db.close();
+                                                 startActivity(menuLem);
+
+                                             } else {
+
+                                                 Toast.makeText(Lembretes.this, "Erro!", Toast.LENGTH_SHORT).show();
+                                             }
+
+
+                                         }
+                                         else
+                                             Toast.makeText(Lembretes.this, "Formato de data Errado(yyyy/mm/dd)", Toast.LENGTH_SHORT).show();
+
                             }
                         })
                 .setNegativeButton("Cancelar",
@@ -151,46 +175,8 @@ public class Lembretes extends AppCompatActivity {
                             }
                         });
 
-        final AlertDialog dialog = mbuilder.create();
+        AlertDialog dialog = mbuilder.create();
         dialog.show();
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Boolean naofechardiaglog = false;
-
-                if(aux.verify(lembrete_data.getText().toString())== 1) {
-
-                    boolean lembretesucesso = ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(),
-                            lembrete_data.getText().toString(), 0, -1); //-1 se não estiver associada a nenhuma atividade
-
-                    naofechardiaglog = true;
-                    if (lembretesucesso == true) {
-
-
-                        Toast.makeText(Lembretes.this, "Lembrete registado com sucesso!", Toast.LENGTH_SHORT).show();
-                        db.close();
-                        startActivity(menuLem);
-
-                    } else {
-
-                        Toast.makeText(Lembretes.this, "Erro!", Toast.LENGTH_SHORT).show();
-                    }
-
-
-                }
-                else {
-
-                    lembrete_data.setError("Formato de data errado - yyyy/mm/dd");
-
-                }
-
-                if(naofechardiaglog)
-                    dialog.dismiss();
-
-            }
-        });
 
 
 
