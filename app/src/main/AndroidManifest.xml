@@ -58,16 +58,11 @@
         <activity
             android:name=".RegistoAtividades"
             android:label="RegistoAtividades"
+            android:parentActivityName=".Atividades"
             >
 
         </activity>
 
-        <activity
-            android:name=".Meteorologia"
-            android:label="Meteorologia"
-            android:parentActivityName=".MainActivity"
-            >
-        </activity>
 
         <activity android:name=".Calendario"
                   android:label="Calendário"

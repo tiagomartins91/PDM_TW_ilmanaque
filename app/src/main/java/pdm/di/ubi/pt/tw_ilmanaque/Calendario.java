@@ -48,27 +48,6 @@ public class Calendario extends AppCompatActivity {
 
 
 
-/**
-        JsonTaskWeek teste = new JsonTaskWeek();
-
-        GPSTracker gpsTracker = new GPSTracker(this);
-
-        Location location = gpsTracker.getLocation();
-
-        double latitude = location.getLatitude();
-        double longiture = location.getLongitude();
-
-        ArrayList<TempoSemanal> arrayListAssyncTask = new ArrayList<>();
-        try {
-            arrayListAssyncTask = teste.execute("http://api.openweathermap.org/data/2.5/forecast?lat="+String.valueOf(latitude)+"&lon="+String.valueOf(longiture)+"&appid=1e49fc78a012d7a8d3cff3325ab72334").get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-**/
-
-
         System.out.println(MainActivity.arrayListAssyncTask.toString());
 
         String x0 = MainActivity.arrayListAssyncTask.get(0).getDt()+"000";
@@ -114,7 +93,7 @@ public class Calendario extends AppCompatActivity {
 
 
                 if (dateClickedNF.equals(finalArrayListAssyncTask.get(0).getDate())) {
-                    tempTV.setText(df.format(finalArrayListAssyncTask.get(0).getTemp()));
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(0).getTemp()) + "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(0).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(0).getCity_name());
 
@@ -138,7 +117,7 @@ public class Calendario extends AppCompatActivity {
                 }
                 else if (dateClickedNF.equals(finalArrayListAssyncTask.get(1).getDate())){
 
-                    tempTV.setText(df.format(finalArrayListAssyncTask.get(1).getTemp()));
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(1).getTemp()) + "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(1).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(1).getCity_name());
 
@@ -162,7 +141,7 @@ public class Calendario extends AppCompatActivity {
                 }
                 else if (dateClickedNF.equals(finalArrayListAssyncTask.get(2).getDate())){
 
-                    tempTV.setText(df.format(finalArrayListAssyncTask.get(2).getTemp()));
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(2).getTemp()) + "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(2).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(2).getCity_name());
 
@@ -187,7 +166,7 @@ public class Calendario extends AppCompatActivity {
                 }
                 else if (dateClickedNF.equals(finalArrayListAssyncTask.get(3).getDate())){
 
-                    tempTV.setText(df.format(finalArrayListAssyncTask.get(3).getTemp()));
+                    tempTV.setText(df.format(finalArrayListAssyncTask.get(3).getTemp())+ "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(3).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(3).getCity_name());
 
@@ -211,7 +190,7 @@ public class Calendario extends AppCompatActivity {
                 }
 
                 else {
-                    Toast.makeText(context, "Sem previsão para mostrar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Sem previsão para mostrar", Toast.LENGTH_LONG).show();
                     tempTV.setText("");
                     humityTV.setText("");
                     cidadeTV.setText("");

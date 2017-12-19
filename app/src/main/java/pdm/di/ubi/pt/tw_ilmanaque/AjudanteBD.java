@@ -191,6 +191,9 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
     }
 
+
+
+
     public int getIdAtividade (String nomeplanta){
 
         Cursor queryres;
@@ -234,6 +237,21 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
     }
 
+    public boolean getLembretesexists (String data, String nome){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor queryres;
+
+        queryres = db.rawQuery("select * "  + " from  " + NOME_TABELA2 + " where " + T2_COLUNA4 + "=" + "'"+0+"'" +" and " +
+                         T2_COLUNA3 + "=" + "'"+data+"'" + " and " + T2_COLUNA2 + "=" + "'" + nome + "'", null);
+
+        if(queryres.getCount()>0)
+            return true;
+        return false;
+
+
+    }
 
 
 
