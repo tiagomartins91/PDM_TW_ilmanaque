@@ -75,6 +75,7 @@ public class Atividades extends AppCompatActivity {
                 final TextView terreno = (TextView) mView.findViewById(R.id.tv_terreno);
                 final TextView quant = (TextView) mView.findViewById(R.id.tv_quantidade);
                 final TextView data = (TextView) mView.findViewById(R.id.tv_data);
+                final TextView sugestao = (TextView) mView.findViewById(R.id.tv_sugestao);
 
                 final Intent menuEdit = new Intent(Atividades.this, EditarAtividade.class);
 
@@ -94,6 +95,7 @@ public class Atividades extends AppCompatActivity {
                 terreno.setText("Terreno: " + queryres.getString(2));
                 quant.setText("Quantidade: " + queryres.getString(3));
                 data.setText("Data: " + queryres.getString(4));
+                sugestao.setText("Sugestão: " );
 
 
                 queryres.close();
