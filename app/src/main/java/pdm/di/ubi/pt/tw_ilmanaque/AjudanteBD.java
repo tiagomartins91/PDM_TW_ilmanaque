@@ -30,6 +30,14 @@ public class AjudanteBD extends SQLiteOpenHelper {
     protected static final String T2_COLUNA5 = "id_atividade";
 
 
+    //tabela da informação do BATATALLLL
+
+    protected static final String TABELA_INFORMACAO = "Informacao";
+    protected static final String T3_COLUNA1 = "plantas";
+    protected static final String T3_COLUNA2 = "epoca";
+    protected static final String T3_COLUNA3 = "pragas_doencas";
+
+
 
     private static final String CRIAR_TABELA_Atividades =
             "CREATE TABLE " + NOME_TABELA1 + "(" +
@@ -49,6 +57,11 @@ public class AjudanteBD extends SQLiteOpenHelper {
                     T2_COLUNA5 + " INTEGER REFERENCES " + NOME_TABELA1 + "( " + T1_COLUNA1 + "), " +
                     "FOREIGN KEY (" +  T2_COLUNA5  + ") REFERENCES " + NOME_TABELA1 + "(" + T1_COLUNA1 + "));";
 
+    private static final String CRIAR_TABELA_Informacao =
+            "CREATE TABLE " + TABELA_INFORMACAO + "(" +
+                    T3_COLUNA1 + " TEXT PRIMARY KEY, " +
+                    T3_COLUNA2 + " TEXT NOT NULL, " +
+                    T3_COLUNA3 + " TEXT NOT NULL);";
 
 
 
@@ -65,6 +78,8 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
         db.execSQL(CRIAR_TABELA_Atividades);
         db.execSQL(CRIAR_TABELA_Lembretes);
+        db.execSQL(CRIAR_TABELA_Informacao);
+        insertDataIntoInformacao(db);
     }
 
     @Override
@@ -72,6 +87,8 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
 
     }
+
+
 
 
     public boolean RegistarAtividade (String nomeatividade, String terreno, int quantidade, String data){
@@ -254,6 +271,34 @@ public class AjudanteBD extends SQLiteOpenHelper {
     }
 
 
+    public void insertDataIntoInformacao (SQLiteDatabase db){
+
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Abóbora', 'Março-Abril', 'Afídios, Cochonilhas')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Aipo', 'Março-Abril', 'Septoriose')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Alface', 'Abril-Junho', 'Pulgão, lagarta')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Alho', 'Primavera e Outono', 'Tripes, piolho,')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Alho francês', 'Março-Maio', 'Sclerotinia, míldio')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Batata', 'Fevereiro-Abril', 'Afídio, escaravelho')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Beringela', 'Fevereiro-Abril', 'ácaro-vermelho, vaquinha')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Beterraba', 'Maio-Junho', 'Afídios,Lagartas')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Beterraba branca (acelga)', 'Abril-Maio', 'Afídios, Lagartas')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Cebola', 'Março Abril', 'ácaros, afídios')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Cebolinho', 'Março-Abril', 'lagarta-rosca, cigarrinhas')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Cenoura', 'Maio-Junho', 'pulgão, lagarta')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Coentro', 'Março-Junho', 'Pulgão, tripes')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Couves', 'Setembro-Dezembro', 'Pulgão, tripes')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Ervilha', 'Outubro-Novembro', 'ácaros, afídeos')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Espinafre', 'Janeiro-Abril Setembro-Outubro', 'Afídeos, mosca')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Feijão', 'Depende da Variedade', 'Cigarrinha, lagarta')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Feijão verde', 'Abril-Junho', 'afídeos, alfinete')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Morango', 'Novembro-Janeiro', 'Pulgão, ácaro')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Nabo', 'Abril-Setembro', 'áltica, mosca')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Pepino', 'Abril-Junho', 'Ácaros, afídeos')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Pimento', 'Março-Maio', 'Lagarta, mosca')");
+        db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Rabanete', 'Março-Abril', 'áltica, a mosca da couve')");
+
+
+    }
 
 
 }
