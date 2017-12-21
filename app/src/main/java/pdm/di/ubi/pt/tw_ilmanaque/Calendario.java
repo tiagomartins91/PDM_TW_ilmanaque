@@ -31,7 +31,7 @@ public class Calendario extends AppCompatActivity {
 
     TextView tempTV;
     TextView humityTV;
-    TextView cidadeTV;
+    TextView cidadeTV, humidade;
     ImageView imgV;
 
     @Override
@@ -87,7 +87,9 @@ public class Calendario extends AppCompatActivity {
                 tempTV = (TextView) findViewById(R.id.tempTV);
                 humityTV = (TextView) findViewById(R.id.humidityTV);
                 cidadeTV = (TextView) findViewById(R.id.cidadeTV);
+                humidade = (TextView) findViewById(R.id.humidade);
                 imgV = (ImageView) findViewById(R.id.imageView);
+
 
                 System.out.println(dateClickedNF);
 
@@ -96,6 +98,7 @@ public class Calendario extends AppCompatActivity {
                     tempTV.setText(df.format(finalArrayListAssyncTask.get(0).getTemp()) + "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(0).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(0).getCity_name());
+                    humidade.setText("Humidade");
 
                     if(finalArrayListAssyncTask.get(0).getWeather().equals("Céu Limpo")) {
                         imgV.setImageResource(R.mipmap.icon_sun);
@@ -120,6 +123,7 @@ public class Calendario extends AppCompatActivity {
                     tempTV.setText(df.format(finalArrayListAssyncTask.get(1).getTemp()) + "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(1).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(1).getCity_name());
+                    humidade.setText("Humidade");
 
                     if(finalArrayListAssyncTask.get(1).getWeather().equals("Céu Limpo")) {
                         imgV.setImageResource(R.mipmap.icon_sun);
@@ -144,6 +148,7 @@ public class Calendario extends AppCompatActivity {
                     tempTV.setText(df.format(finalArrayListAssyncTask.get(2).getTemp()) + "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(2).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(2).getCity_name());
+                    humidade.setText("Humidade");
 
                     if(finalArrayListAssyncTask.get(2).getWeather().equals("Céu Limpo")) {
                         imgV.setImageResource(R.mipmap.icon_sun);
@@ -169,6 +174,7 @@ public class Calendario extends AppCompatActivity {
                     tempTV.setText(df.format(finalArrayListAssyncTask.get(3).getTemp())+ "ºC");
                     humityTV.setText(String.valueOf(finalArrayListAssyncTask.get(3).getHumity())+"%");
                     cidadeTV.setText(finalArrayListAssyncTask.get(3).getCity_name());
+                    humidade.setText("Humidade");
 
                     if(finalArrayListAssyncTask.get(3).getWeather().equals("Céu Limpo")) {
                         imgV.setImageResource(R.mipmap.icon_sun);
@@ -194,6 +200,7 @@ public class Calendario extends AppCompatActivity {
                     tempTV.setText("");
                     humityTV.setText("");
                     cidadeTV.setText("");
+                    humidade.setText("");
                     imgV.setImageResource(0);
                 }
 
