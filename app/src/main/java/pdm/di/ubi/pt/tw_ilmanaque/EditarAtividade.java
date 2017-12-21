@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -18,7 +19,8 @@ import android.widget.Toast;
 public class EditarAtividade extends AppCompatActivity {
 
     String id_atividade;
-    EditText editar_nome, editar_terreno, editar_quant, editar_data;
+    EditText editar_nome, editar_terreno, editar_quant;
+    TextView data;
     int id_int;
 
     @Override
@@ -37,7 +39,7 @@ public class EditarAtividade extends AppCompatActivity {
         editar_nome = (EditText) findViewById(R.id.etEditarNomeAtividade);
         editar_terreno = (EditText) findViewById(R.id.etEditarTerreno);
         editar_quant = (EditText) findViewById(R.id.etEditarQuantidade);
-        editar_data = (EditText) findViewById(R.id.etEditarData);
+        data = (TextView) findViewById(R.id.etEditarData);
 
         id_int = Integer.parseInt(id_atividade);
 
@@ -51,7 +53,7 @@ public class EditarAtividade extends AppCompatActivity {
         editar_nome.setText(queryres.getString(1));
         editar_terreno.setText(queryres.getString(2));
         editar_quant.setText(queryres.getString(3));
-        editar_data.setText(queryres.getString(4));
+        data.setText(queryres.getString(4));
 
 
         queryres.close();
@@ -88,12 +90,6 @@ public class EditarAtividade extends AppCompatActivity {
             editar_quant.setError("Campo Obrigatório");
 
         }
-        else if (TextUtils.isEmpty(editar_data.getText().toString())) {
-
-            editar_data.requestFocus();
-            editar_data.setError("Campo Obrigatório");
-
-        }
         else
             flag = 1;
 
@@ -111,7 +107,7 @@ public class EditarAtividade extends AppCompatActivity {
                                     editar_nome.getText().toString(),
                                     editar_terreno.getText().toString(),
                                     Integer.parseInt(editar_quant.getText().toString()),
-                                            editar_data.getText().toString());
+                                            data.getText().toString());
 
                             if (updatesucesso == true) {
 
