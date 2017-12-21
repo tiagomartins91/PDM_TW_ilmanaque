@@ -195,8 +195,17 @@ public class RegistoAtividades extends AppCompatActivity {
 
                         if(aux.verify(lembrete_data.getText().toString())== 1) {
 
+                            boolean inserirsucesso = ajudanteBD.RegistarAtividade(
+                                    nomeplanta.getText().toString(),
+                                    terreno.getText().toString(),
+                                    Integer.parseInt(quantidade.getText().toString()),
+                                    data.getText().toString());
+
+
+                            int id_atividade = ajudanteBD.getIdAtividade(nomeplanta.getText().toString());
+
                             boolean lembretesucesso = ajudanteBD.RegistarLembrete(lembrete_descricao.getText().toString(),
-                                    lembrete_data.getText().toString(), 0, -1); //-1 se não estiver associada a nenhuma atividade
+                                    lembrete_data.getText().toString(), 0,id_atividade); //-1 se não estiver associada a nenhuma atividade
 
                             naofechardiaglog = true;
                             if (lembretesucesso == true) {
