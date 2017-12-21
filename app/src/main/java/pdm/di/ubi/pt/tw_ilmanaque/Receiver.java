@@ -53,9 +53,9 @@ public class Receiver extends BroadcastReceiver {
                 if (data.getTime() > (System.currentTimeMillis() - (86400000/2)) && data.getTime() < (System.currentTimeMillis() + (86400000/2))) {
                     System.out.println("intento no dia  ");
                     System.out.println("Descrição" + queryres.getString(1));
-
+                    Intent notificationIntent = new Intent(context, Lembretes.class);
                     long[] pattern = {0,300,0};
-                    PendingIntent p1 = PendingIntent.getActivity(context,i,intento,0);
+                    PendingIntent p1 = PendingIntent.getActivity(context,i,notificationIntent,0);
 
                     NotificationCompat.Builder nbuilder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.icon_app)
