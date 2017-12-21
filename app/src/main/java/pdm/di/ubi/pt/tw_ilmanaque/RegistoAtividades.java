@@ -139,7 +139,7 @@ public class RegistoAtividades extends AppCompatActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(ml);
                formatter.format(calendar.getTime());
-                ajudanteBD.RegistarLembrete("Teste", formatter.format(calendar.getTime()), 0, id_atividade);
+                ajudanteBD.RegistarLembrete("Lembrete " + nomeplanta.getText().toString(), formatter.format(calendar.getTime()), 0, id_atividade);
                 if (inserirsucesso == true) {
 
 
