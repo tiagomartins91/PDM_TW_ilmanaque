@@ -60,11 +60,11 @@ public class Informacoes extends AppCompatActivity {
             oCursor.moveToFirst();
 
             while(!oCursor.isAfterLast()){
-                String nomePlanta = oCursor.getString(0).toString();
+                String nomePlanta = "Nome da Planta: " + oCursor.getString(0).toString();
                 listDataHeader.add(nomePlanta);
                 ArrayList<String> infos = new ArrayList<>();
 
-                infos.add("Epoca de Cultivo: " + oCursor.getString(1).toString());
+                infos.add("Época de Cultivo: " + oCursor.getString(1).toString());
                 infos.add("Pragas e Doenças: " + oCursor.getString(2).toString());
 
                 listHashMap.put(nomePlanta,infos);

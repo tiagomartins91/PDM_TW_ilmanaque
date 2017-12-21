@@ -78,7 +78,7 @@
 
         <activity android:name=".Informacoes"
             android:parentActivityName=".MainActivity"
-            android:label="Informacoes"/>
+            android:label="Informações"/>
 
     </application>
 
