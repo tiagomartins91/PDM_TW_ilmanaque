@@ -271,6 +271,19 @@ public class AjudanteBD extends SQLiteOpenHelper {
     }
 
 
+    public Cursor getNameFromInformacoes (){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor query;
+
+        query = db.rawQuery("SELECT * " + " FROM " + TABELA_INFORMACAO, null);
+
+        return query;
+    }
+
+
+
     public void insertDataIntoInformacao (SQLiteDatabase db){
 
         db.execSQL("INSERT into " + TABELA_INFORMACAO + " ("+ T3_COLUNA1 +", " + T3_COLUNA2 + ", " + T3_COLUNA3 + ") " + "values ('Abóbora', 'Março-Abril', 'Afídios, Cochonilhas')");
@@ -299,6 +312,9 @@ public class AjudanteBD extends SQLiteOpenHelper {
 
 
     }
+
+
+
 
 
 }
