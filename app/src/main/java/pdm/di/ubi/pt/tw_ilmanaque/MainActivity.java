@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-
         GPSTracker gpsTracker = new GPSTracker(this);
         Location location = gpsTracker.getLocation();//gpsTracker.getLocation();
 
@@ -117,6 +116,13 @@ public class MainActivity extends AppCompatActivity{
         Intent iIntent = new Intent (this, MainActivity.class);
         startActivity(iIntent);
 
+    }
+
+
+    public void abrirInformacoes (View v){
+
+        Intent intent = new Intent(this, Informacoes.class);
+        startActivity(intent);
     }
 
 

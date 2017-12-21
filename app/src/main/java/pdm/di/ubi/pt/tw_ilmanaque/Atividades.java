@@ -22,7 +22,6 @@ public class Atividades extends AppCompatActivity {
 
 
     ArrayList<String> atividades_array = new ArrayList<String>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -56,12 +55,26 @@ public class Atividades extends AppCompatActivity {
         atividades.setAdapter(adapter);
 
 
-
-
         atividades.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                float chuva = 0 ;
 
+                if (MainActivity.arrayListAssyncTask.isEmpty())
+                    System.out.println("Array Vazio");
+                else
+                {
+                    for(int i = 0 ;i<MainActivity.arrayListAssyncTask.size();i++)
+                    {
+                        if(MainActivity.arrayListAssyncTask.get(i).getWeather().equals("Chuva"))
+                            chuva++;
+                    }
+
+                    chuva = chuva/4;
+                    chuva = 1 - chuva;
+                    chuva = chuva *100;
+
+                }
 
                 String linha = (String) atividades.getItemAtPosition(position);
                 String[] tokens = linha.split("-");
@@ -95,7 +108,7 @@ public class Atividades extends AppCompatActivity {
                 terreno.setText("Terreno: " + queryres.getString(2));
                 quant.setText("Quantidade: " + queryres.getString(3));
                 data.setText("Data: " + queryres.getString(4));
-                sugestao.setText("Sugestão: " );
+                sugestao.setText("Sugestão de volume de água é: " + chuva+"%");
 
 
                 queryres.close();

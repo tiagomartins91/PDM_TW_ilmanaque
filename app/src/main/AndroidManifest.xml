@@ -76,8 +76,9 @@
             android:label="Editar Atividade"
             android:parentActivityName=".Atividades"/>
 
-
-
+        <activity android:name=".Informacoes"
+            android:parentActivityName=".MainActivity"
+            android:label="Informacoes"/>
 
     </application>
 
