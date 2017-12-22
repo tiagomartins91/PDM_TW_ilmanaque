@@ -24,9 +24,9 @@ public class Receiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intento) {
 
-
+        System.out.println("nao mudou");
         if (intento.getAction().equals(Intent.ACTION_DATE_CHANGED)) {
-
+            System.out.println("Data mudou");
 
             System.out.println(System.currentTimeMillis());
 
@@ -45,17 +45,17 @@ public class Receiver extends BroadcastReceiver {
 
                     String data_lembrete = queryres.getString(2);
                     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-
+                    System.out.println("i = "+ i);
                     Date data = format.parse(data_lembrete);
                     System.out.println("Com sucesso" + data);
                     System.out.println(data.getTime());
 
                 if (data.getTime() > (System.currentTimeMillis() - (86400000/2)) && data.getTime() < (System.currentTimeMillis() + (86400000/2))) {
-                    System.out.println("intento no dia");
+                    System.out.println("intento no dia  ");
                     System.out.println("Descrição" + queryres.getString(1));
 
                     long[] pattern = {0,300,0};
-                    PendingIntent p1 = PendingIntent.getActivity(context,0123,intento,0);
+                    PendingIntent p1 = PendingIntent.getActivity(context,i,intento,0);
 
                     NotificationCompat.Builder nbuilder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.mipmap.icon_app)
@@ -69,7 +69,7 @@ public class Receiver extends BroadcastReceiver {
                     nbuilder.setDefaults(Notification.DEFAULT_SOUND);
                     nbuilder.setAutoCancel(true);
                     NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                    mNotificationManager.notify(0123, nbuilder.build());
+                    mNotificationManager.notify(i, nbuilder.build());
 
                 }
 
