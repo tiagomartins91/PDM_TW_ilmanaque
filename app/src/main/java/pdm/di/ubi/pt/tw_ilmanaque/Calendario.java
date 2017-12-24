@@ -113,7 +113,7 @@ public class Calendario extends AppCompatActivity {
                         imgV.setImageResource(R.mipmap.icon_clouds);
                     }
                     else {
-                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+                        imgV.setImageResource(R.mipmap.icon_meteo);
 
                     }
 
@@ -138,7 +138,7 @@ public class Calendario extends AppCompatActivity {
                         imgV.setImageResource(R.mipmap.icon_clouds);
                     }
                     else {
-                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+                        imgV.setImageResource(R.mipmap.icon_meteo);
 
                     }
 
@@ -163,7 +163,7 @@ public class Calendario extends AppCompatActivity {
                         imgV.setImageResource(R.mipmap.icon_clouds);
                     }
                     else {
-                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+                        imgV.setImageResource(R.mipmap.icon_meteo);
 
                     }
 
@@ -189,7 +189,7 @@ public class Calendario extends AppCompatActivity {
                         imgV.setImageResource(R.mipmap.icon_clouds);
                     }
                     else {
-                        imgV.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+                        imgV.setImageResource(R.mipmap.icon_meteo);
 
                     }
 
