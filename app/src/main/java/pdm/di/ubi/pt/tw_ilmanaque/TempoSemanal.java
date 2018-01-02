@@ -1,10 +1,5 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
-import java.util.Date;
-
-/**
- * Created by joaosaraiva on 18-12-2017.
- */
 
 public class TempoSemanal {
 

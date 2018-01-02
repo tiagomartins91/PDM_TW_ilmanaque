@@ -14,21 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-/**
- * Created by TiagoMartins on 18/12/2017.
- */
 
-public class Receiver extends BroadcastReceiver {
+
+public class Receiver extends BroadcastReceiver { //Broadcast para detectar evento do sistema e enviar as notificações
 
 
     @Override
     public void onReceive(Context context, Intent intento) {
 
-        System.out.println("nao mudou");
-        if (intento.getAction().equals(Intent.ACTION_DATE_CHANGED)) {
-            System.out.println("Data mudou");
 
-            System.out.println(System.currentTimeMillis());
+        if (intento.getAction().equals(Intent.ACTION_DATE_CHANGED)) {
 
             AjudanteBD ajudanteBD = new AjudanteBD(context);
             SQLiteDatabase db = ajudanteBD.getWritableDatabase();
@@ -45,14 +40,11 @@ public class Receiver extends BroadcastReceiver {
 
                     String data_lembrete = queryres.getString(2);
                     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-                    System.out.println("i = "+ i);
                     Date data = format.parse(data_lembrete);
-                    System.out.println("Com sucesso" + data);
-                    System.out.println(data.getTime());
+
 
                 if (data.getTime() > (System.currentTimeMillis() - (86400000/2)) && data.getTime() < (System.currentTimeMillis() + (86400000/2))) {
-                    System.out.println("intento no dia  ");
-                    System.out.println("Descrição" + queryres.getString(1));
+
                     Intent notificationIntent = new Intent(context, Lembretes.class);
                     long[] pattern = {0,300,0};
                     PendingIntent p1 = PendingIntent.getActivity(context,i,notificationIntent,0);

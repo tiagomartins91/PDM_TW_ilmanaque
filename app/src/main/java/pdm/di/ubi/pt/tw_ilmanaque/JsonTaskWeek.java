@@ -1,12 +1,7 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
-import android.content.Intent;
-import android.graphics.Color;
+
 import android.os.AsyncTask;
-import android.util.Log;
-
-import com.github.sundeepk.compactcalendarview.domain.Event;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,9 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * Created by joaosaraiva on 15-12-2017.
- */
 
 public class JsonTaskWeek extends AsyncTask<String, Void, ArrayList<TempoSemanal>> {
 
@@ -161,7 +153,7 @@ public class JsonTaskWeek extends AsyncTask<String, Void, ArrayList<TempoSemanal
 
             return arrayTempoSemanal;
 
-        } catch (MalformedURLException e) {//ver q execao meter aqui
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

@@ -12,9 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by TiagoMartins on 17/12/2017.
- */
 
 public class EditarAtividade extends AppCompatActivity {
 

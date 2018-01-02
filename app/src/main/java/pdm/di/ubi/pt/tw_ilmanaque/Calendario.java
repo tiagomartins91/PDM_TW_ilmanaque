@@ -2,9 +2,6 @@ package pdm.di.ubi.pt.tw_ilmanaque;
 
 
 import android.content.Context;
-import android.graphics.Color;
-import android.location.Location;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -19,9 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
-public class Calendario extends AppCompatActivity {
+
+public class Calendario extends AppCompatActivity { //Calendário
 
     CompactCalendarView compactCalendar;
     private SimpleDateFormat dateFormatMonth = new SimpleDateFormat("MMMM- yyyy", Locale.getDefault());

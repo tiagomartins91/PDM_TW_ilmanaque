@@ -1,8 +1,5 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
-/**
- * Created by saraiva on 19-12-2017.
- */
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -15,7 +12,7 @@ import android.util.Log;
 import static android.content.Context.LOCATION_SERVICE;
 
 
-public class GPSTracker implements LocationListener {
+public class GPSTracker implements LocationListener {  //GPS
 
     Context context;
 

@@ -1,15 +1,9 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.ContentValues;
-import android.content.Context;
+
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -18,14 +12,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
-/**
- * Created by TiagoMartins on 15/12/2017.
- */
+
+
 
 public class RegistoAtividades extends AppCompatActivity {
 
@@ -135,7 +126,8 @@ public class RegistoAtividades extends AppCompatActivity {
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-                // Create a calendar object that will convert the date and time value in milliseconds to date.
+
+                //Converter data e tempo em milisegundos
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(ml);
                formatter.format(calendar.getTime());

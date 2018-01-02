@@ -14,9 +14,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DecimalFormat;
 
-/**
- * Created by saraiva on 17-12-2017.
- */
 
 public class JsonTaskToday extends AsyncTask<String, Void, String> {
 
@@ -95,7 +92,7 @@ Auxiliar aux = new Auxiliar();
                 MainActivity.tempo.setImageResource(R.mipmap.icon_clouds);
             }
             else {
-                MainActivity.tempo.setImageResource(R.mipmap.icon_meteo);//VER QUE IMG METER AQUI!!!!
+                MainActivity.tempo.setImageResource(R.mipmap.icon_meteo);
 
             }
 

@@ -6,13 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.w3c.dom.Text;
 
-/**
- * Created by TiagoMartins on 15/12/2017.
- */
-
-public class AjudanteBD extends SQLiteOpenHelper {
+public class AjudanteBD extends SQLiteOpenHelper {  // Base de Dados
 
     private static final int VERSAO_BASEDADOS = 1;
     private static final String NOME_BASEDADOS = "DBilmanaque";
@@ -29,8 +24,6 @@ public class AjudanteBD extends SQLiteOpenHelper {
     protected static final String T2_COLUNA4 = "estado";      //0-por fazer, 1-feito
     protected static final String T2_COLUNA5 = "id_atividade";
 
-
-    //tabela da informação do BATATALLLL
 
     protected static final String TABELA_INFORMACAO = "Informacao";
     protected static final String T3_COLUNA1 = "plantas";

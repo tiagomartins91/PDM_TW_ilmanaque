@@ -1,20 +1,17 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class Informacoes extends AppCompatActivity {
+public class Informacoes extends AppCompatActivity {  //Informações
 
 
     private ExpandableListView eListView;

@@ -1,21 +1,18 @@
 package pdm.di.ubi.pt.tw_ilmanaque;
-import android.graphics.Color;
 
-import java.util.Calendar;
+import android.graphics.Color;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by saraiva on 17-12-2017.
- */
 
-public class Auxiliar {
+
+public class Auxiliar {  // Classe Auxiliar para ajudar noutras classes java
 
     public Auxiliar() {
     }
 
     //Clear Rain Clouds
-    String parseWeatherCondition(String s){
+    String parseWeatherCondition(String s){   //tradução
 
         if(s.equals("Clear"))
             return "Céu Limpo";
@@ -36,7 +33,8 @@ public class Auxiliar {
     }
 
 
-    int getColor (String s){
+    int getColor (String s){ //identificação por cores
+
         if (s.equals("Céu Limpo"))
             return Color.GREEN;
 
@@ -54,8 +52,8 @@ public class Auxiliar {
     }
 
 
-    public int verify(String s)
-    {
+    public int verify(String s) {   //verificação
+
         Pattern p = Pattern.compile("\\d\\d\\d\\d/\\d\\d/\\d\\d");
         Matcher m = p.matcher(s);
         if(m.matches())
